@@ -8,7 +8,7 @@ const RevenueChart = dynamic(() => import('@/components/dashboard/RevenueChart')
   ssr: false, 
   loading: () => <div className="h-80 w-full animate-pulse bg-gray-200 dark:bg-gray-700 rounded-xl"></div> 
 });
-import { DollarSign, FileText, Activity } from 'lucide-react';
+import { Banknote, FileText, Activity } from 'lucide-react';
 import clsx from 'clsx';
 import { useCurrency } from '@/context/CurrencyContext';
 import { formatCurrency } from '@/lib/currency';
@@ -55,7 +55,7 @@ export default function Dashboard() {
   }
 
   const stats = [
-    { name: 'Total Revenue', value: formatCurrency(summary.totalRevenue, currency), icon: DollarSign, color: 'text-green-500', bg: 'bg-green-100 dark:bg-green-900/30' },
+    { name: 'Total Revenue', value: formatCurrency(summary.totalRevenue, currency), icon: Banknote, color: 'text-green-500', bg: 'bg-green-100 dark:bg-green-900/30' },
     { name: 'Total Pending', value: formatCurrency(summary.totalPending, currency), icon: Activity, color: 'text-amber-500', bg: 'bg-amber-100 dark:bg-amber-900/30' },
     { name: 'System Invoices', value: summary.invoiceCount, icon: FileText, color: 'text-indigo-500', bg: 'bg-indigo-100 dark:bg-indigo-900/30' },
   ];
