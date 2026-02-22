@@ -15,7 +15,10 @@ import dashboardRoutes from "./modules/dashboard/routes.js";
 const app = express();
 
 app.use(cors({
-  origin: [process.env.FRONTEND_URL].filter(Boolean),
+  origin: (origin, callback) => {
+    // Allow all origins
+    callback(null, true);
+  },
   credentials: true
 }));
 

@@ -5,7 +5,13 @@ import { prisma } from "../config/db.js";
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
-  trustedOrigins: [process.env.FRONTEND_URL].filter(Boolean),
+  trustedOrigins: [
+    process.env.FRONTEND_URL,
+    process.env.BASE_URL,
+    "http://localhost:3000",
+    "http://localhost:8080",
+    "https://invoicify-rho.vercel.app"
+  ].filter(Boolean),
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
