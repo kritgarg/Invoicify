@@ -51,11 +51,11 @@ export const auth = betterAuth({
     level: "debug"
   },
   advanced: {
-    useSecureCookies: true,
+    useSecureCookies: process.env.NODE_ENV === "production",
     cookieOptions: {
-      sameSite: "none",
-      secure: true,
-      httpOnly: true
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
     }
   },
   trustProxy: true
