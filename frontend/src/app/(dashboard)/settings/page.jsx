@@ -18,8 +18,9 @@ export default function SettingsPage() {
       if (data.user?.role !== 'admin') {
         window.location.href = '/dashboard'; // Redirect non-admins
       }
-      if (data.user?.organization?.name) {
+      if (data.user?.organization) {
         setValue('organizationName', data.user.organization.name);
+        setValue('currency', data.user.organization.currency || 'USD');
       }
     } catch (err) {
       console.error(err);
@@ -36,7 +37,10 @@ export default function SettingsPage() {
     try {
       setIsSaving(true);
       setMessage(null);
-      await api.patch('/users/organization', { name: data.organizationName });
+      await api.patch('/users/organization', { 
+        name: data.organizationName,
+        currency: data.currency
+      });
       setMessage({ type: 'success', text: 'Organization details updated successfully. They will now appear on all generated invoices.' });
     } catch (err) {
       setMessage({ type: 'error', text: 'Failed to update organization settings.' });
@@ -83,6 +87,23 @@ export default function SettingsPage() {
                   className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   placeholder="Acme Corp"
                 />
+              </div>
+            </div>
+
+            <div className="sm:col-span-4">
+              <label htmlFor="currency" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Base Currency
+              </label>
+              <div className="mt-1">
+                <select
+                  id="currency"
+                  {...register('currency', { required: true })}
+                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="USD">USD ($)</option>
+                  <option value="INR">INR (₹)</option>
+                  <option value="EUR">EUR (€)</option>
+                </select>
               </div>
             </div>
           </div>

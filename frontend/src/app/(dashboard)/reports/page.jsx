@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import api from '@/lib/api';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { Calendar } from 'lucide-react';
+import { useCurrency } from '@/context/CurrencyContext';
+import { formatCurrency } from '@/lib/currency';
 
 const COLORS = {
   PAID: '#10b981',   // emerald-500
@@ -13,6 +15,7 @@ const COLORS = {
 };
 
 export default function ReportsPage() {
+  const currency = useCurrency();
   const [range, setRange] = useState('30d');
   const [invoiceStatusData, setInvoiceStatusData] = useState([]);
   const [revenue, setRevenue] = useState(0);
@@ -86,7 +89,7 @@ export default function ReportsPage() {
             {loading ? (
               <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-10 w-32 rounded"></div>
             ) : (
-              <span className="text-5xl font-extrabold text-indigo-600 dark:text-indigo-400">${revenue.toFixed(2)}</span>
+              <span className="text-5xl font-extrabold text-indigo-600 dark:text-indigo-400">{formatCurrency(revenue, currency)}</span>
             )}
           </div>
         </div>

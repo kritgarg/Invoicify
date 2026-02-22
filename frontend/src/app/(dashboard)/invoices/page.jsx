@@ -8,8 +8,11 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import clsx from 'clsx';
 import InvoicePreviewModal from '@/components/pdf/InvoicePreviewModal';
+import { useCurrency } from '@/context/CurrencyContext';
+import { formatCurrency, getCurrencySymbol } from '@/lib/currency';
 
 export default function InvoicesPage() {
+  const currency = useCurrency();
   const [invoices, setInvoices] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [itemsList, setItemsList] = useState([]);
@@ -201,7 +204,7 @@ export default function InvoicesPage() {
                   <div className="text-sm text-gray-500">{invoice.customer.name}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-bold text-gray-900 dark:text-white">${invoice.total.toFixed(2)}</div>
+                  <div className="text-sm font-bold text-gray-900 dark:text-white">{formatCurrency(invoice.total, currency)}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <div>Iss: {format(new Date(invoice.issueDate), 'MMM dd, yyyy')}</div>
@@ -333,7 +336,7 @@ export default function InvoicesPage() {
                           </div>
                           <div className="w-32">
                             <div className="flex bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm">
-                              <span className="flex items-center pl-3 text-gray-500 sm:text-sm">$</span>
+                              <span className="flex items-center pl-3 text-gray-500 sm:text-sm">{getCurrencySymbol(currency)}</span>
                               <input {...register(`items.${index}.price`)} type="number" min="0" step="0.01" className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm py-2 px-2 border-0 bg-transparent text-gray-900 dark:text-white" />
                             </div>
                           </div>
@@ -353,18 +356,18 @@ export default function InvoicesPage() {
                       <div className="w-64 space-y-3 text-sm">
                         <div className="flex justify-between items-end text-gray-700 dark:text-gray-300">
                           <span>Subtotal</span>
-                          <span className="font-medium">${subtotal.toFixed(2)}</span>
+                          <span className="font-medium">{formatCurrency(subtotal, currency)}</span>
                         </div>
                         <div className="flex justify-between items-center text-gray-700 dark:text-gray-300">
                           <div className="flex items-center">
                             Tax 
                             <input {...register('taxRate')} type="number" step="0.1" className="w-16 ml-2 px-1 py-0.5 border border-gray-300 dark:border-gray-600 rounded bg-transparent text-right" />%
                           </div>
-                          <span className="font-medium">${tax.toFixed(2)}</span>
+                          <span className="font-medium">{formatCurrency(tax, currency)}</span>
                         </div>
                         <div className="flex justify-between items-end border-t border-gray-200 dark:border-gray-600 pt-3 text-lg font-bold text-gray-900 dark:text-white">
                           <span>Total</span>
-                          <span>${total.toFixed(2)}</span>
+                          <span>{formatCurrency(total, currency)}</span>
                         </div>
                       </div>
                     </div>

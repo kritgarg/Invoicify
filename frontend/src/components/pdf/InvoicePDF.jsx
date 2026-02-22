@@ -1,5 +1,6 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { formatCurrency } from '@/lib/currency';
 
 const styles = StyleSheet.create({
   page: { padding: 40, fontFamily: 'Helvetica' },
@@ -72,8 +73,8 @@ const InvoicePDF = ({ invoice, organization }) => (
           <View key={i} style={styles.tableRow}>
             <Text style={styles.colDesc}>{item.description}</Text>
             <Text style={styles.colQty}>{item.quantity}</Text>
-            <Text style={styles.colPrice}>${item.price.toFixed(2)}</Text>
-            <Text style={styles.colTotal}>${item.total.toFixed(2)}</Text>
+            <Text style={styles.colPrice}>{formatCurrency(item.price, organization?.currency)}</Text>
+            <Text style={styles.colTotal}>{formatCurrency(item.total, organization?.currency)}</Text>
           </View>
         ))}
       </View>
@@ -82,17 +83,17 @@ const InvoicePDF = ({ invoice, organization }) => (
       <View style={styles.totalsSection}>
         <View style={styles.totalRow}>
           <Text style={styles.totalText}>Subtotal:</Text>
-          <Text style={styles.totalText}>${invoice?.subtotal?.toFixed(2)}</Text>
+          <Text style={styles.totalText}>{formatCurrency(invoice?.subtotal, organization?.currency)}</Text>
         </View>
         {invoice?.tax > 0 && (
           <View style={styles.totalRow}>
             <Text style={styles.totalText}>Tax:</Text>
-            <Text style={styles.totalText}>${invoice?.tax?.toFixed(2)}</Text>
+            <Text style={styles.totalText}>{formatCurrency(invoice?.tax, organization?.currency)}</Text>
           </View>
         )}
         <View style={[styles.totalRow, { marginTop: 10, paddingTop: 10, borderTopWidth: 1, borderTopColor: '#E5E7EB' }]}>
           <Text style={{ ...styles.totalText, fontWeight: 'bold' }}>Total Due:</Text>
-          <Text style={styles.totalAmountText}>${invoice?.total?.toFixed(2)}</Text>
+          <Text style={styles.totalAmountText}>{formatCurrency(invoice?.total, organization?.currency)}</Text>
         </View>
       </View>
 

@@ -4,15 +4,19 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line 
 } from 'recharts';
+import { useCurrency } from '@/context/CurrencyContext';
+import { getCurrencySymbol } from '@/lib/currency';
 
 export default function RevenueChart({ revenue }) {
+  const currency = useCurrency();
+  const symbol = getCurrencySymbol(currency);
   return (
     <div className="h-80">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={revenue}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#374151" opacity={0.2} />
           <XAxis dataKey="date" stroke="#9ca3af" fontSize={12} tickLine={false} axisLine={false} />
-          <YAxis stroke="#9ca3af" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `$${value}`} />
+          <YAxis stroke="#9ca3af" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `${symbol}${value}`} />
           <Tooltip 
             contentStyle={{ backgroundColor: '#1f2937', borderColor: '#374151', color: '#f3f4f6', borderRadius: '0.5rem' }}
             itemStyle={{ color: '#818cf8', fontWeight: 'bold' }}

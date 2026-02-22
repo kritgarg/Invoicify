@@ -25,10 +25,13 @@ export default function InvoicePreviewModal({ invoiceId, onClose }) {
           api.get('/auth/me')
         ]);
         setInvoice(invRes.data);
-        if (orgRes.data?.user?.organization?.name) {
-          setOrganization({ name: orgRes.data.user.organization.name });
+        if (orgRes.data?.user?.organization) {
+          setOrganization({ 
+            name: orgRes.data.user.organization.name,
+            currency: orgRes.data.user.organization.currency || 'USD'
+          });
         } else {
-          setOrganization({ name: 'Your Company' });
+          setOrganization({ name: 'Your Company', currency: 'USD' });
         }
       } catch (err) {
         console.error('Failed to load invoice preview', err);

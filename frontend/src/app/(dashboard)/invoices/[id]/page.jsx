@@ -10,8 +10,11 @@ import clsx from 'clsx';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import InvoicePDF from '@/components/pdf/InvoicePDF';
 import { useForm } from 'react-hook-form';
+import { useCurrency } from '@/context/CurrencyContext';
+import { formatCurrency, getCurrencySymbol } from '@/lib/currency';
 
 export default function InvoiceDetailPage() {
+  const currency = useCurrency();
   const params = useParams();
   const router = useRouter();
   const [invoice, setInvoice] = useState(null);
@@ -29,8 +32,11 @@ export default function InvoiceDetailPage() {
         api.get('/auth/me')
       ]);
       setInvoice(invRes.data);
-      if (orgRes.data?.user?.organizationId) {
-        setOrganization({ name: orgRes.data.user?.organization?.name || 'Your Company' });
+      if (orgRes.data?.user?.organization) {
+        setOrganization({ 
+            name: orgRes.data.user.organization.name || 'Your Company',
+            currency: orgRes.data.user.organization.currency || 'USD'
+        });
       }
     } catch (err) {
       console.error('Failed to load invoice', err);
@@ -160,25 +166,25 @@ export default function InvoiceDetailPage() {
               <tr key={idx}>
                 <td className="py-4 text-sm text-gray-900 dark:text-white">{item.description}</td>
                 <td className="py-4 text-sm text-right text-gray-900 dark:text-white">{item.quantity}</td>
-                <td className="py-4 text-sm text-right text-gray-900 dark:text-white">${item.price.toFixed(2)}</td>
-                <td className="py-4 text-sm text-right font-medium text-gray-900 dark:text-white">${item.total.toFixed(2)}</td>
+                <td className="py-4 text-sm text-right text-gray-900 dark:text-white">{formatCurrency(item.price, currency)}</td>
+                <td className="py-4 text-sm text-right font-medium text-gray-900 dark:text-white">{formatCurrency(item.total, currency)}</td>
               </tr>
             ))}
           </tbody>
           <tfoot className="border-t-2 border-gray-200 dark:border-gray-700">
             <tr>
               <td colSpan="3" className="py-3 text-right text-sm font-medium text-gray-500">Subtotal:</td>
-              <td className="py-3 text-right text-sm font-medium text-gray-900 dark:text-white">${invoice.subtotal.toFixed(2)}</td>
+              <td className="py-3 text-right text-sm font-medium text-gray-900 dark:text-white">{formatCurrency(invoice.subtotal, currency)}</td>
             </tr>
             {invoice.tax > 0 && (
               <tr>
                 <td colSpan="3" className="py-3 text-right text-sm font-medium text-gray-500">Tax:</td>
-                <td className="py-3 text-right text-sm font-medium text-gray-900 dark:text-white">${invoice.tax.toFixed(2)}</td>
+                <td className="py-3 text-right text-sm font-medium text-gray-900 dark:text-white">{formatCurrency(invoice.tax, currency)}</td>
               </tr>
             )}
             <tr>
               <td colSpan="3" className="py-3 text-right text-base font-bold text-gray-900 dark:text-white">Total:</td>
-              <td className="py-3 text-right text-base font-bold text-indigo-600 dark:text-indigo-400">${invoice.total.toFixed(2)}</td>
+              <td className="py-3 text-right text-base font-bold text-indigo-600 dark:text-indigo-400">{formatCurrency(invoice.total, currency)}</td>
             </tr>
           </tfoot>
         </table>
@@ -200,7 +206,7 @@ export default function InvoiceDetailPage() {
               <div className="flex items-center">
                 <CreditCard className="h-5 w-5 text-gray-400 mr-3" />
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">${payment.amount.toFixed(2)}</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{formatCurrency(payment.amount, currency)}</p>
                   <p className="text-xs text-gray-500">{format(new Date(payment.paymentDate), 'MMM d, yyyy h:mm a')} • {payment.method}</p>
                 </div>
               </div>

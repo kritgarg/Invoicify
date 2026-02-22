@@ -10,8 +10,11 @@ const RevenueChart = dynamic(() => import('@/components/dashboard/RevenueChart')
 });
 import { DollarSign, FileText, Activity } from 'lucide-react';
 import clsx from 'clsx';
+import { useCurrency } from '@/context/CurrencyContext';
+import { formatCurrency } from '@/lib/currency';
 
 export default function Dashboard() {
+  const currency = useCurrency();
   const [summary, setSummary] = useState({ totalRevenue: 0, totalPending: 0, invoiceCount: 0 });
   const [revenue, setRevenue] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,8 +55,8 @@ export default function Dashboard() {
   }
 
   const stats = [
-    { name: 'Total Revenue', value: `$${summary.totalRevenue.toFixed(2)}`, icon: DollarSign, color: 'text-green-500', bg: 'bg-green-100 dark:bg-green-900/30' },
-    { name: 'Total Pending', value: `$${summary.totalPending.toFixed(2)}`, icon: Activity, color: 'text-amber-500', bg: 'bg-amber-100 dark:bg-amber-900/30' },
+    { name: 'Total Revenue', value: formatCurrency(summary.totalRevenue, currency), icon: DollarSign, color: 'text-green-500', bg: 'bg-green-100 dark:bg-green-900/30' },
+    { name: 'Total Pending', value: formatCurrency(summary.totalPending, currency), icon: Activity, color: 'text-amber-500', bg: 'bg-amber-100 dark:bg-amber-900/30' },
     { name: 'System Invoices', value: summary.invoiceCount, icon: FileText, color: 'text-indigo-500', bg: 'bg-indigo-100 dark:bg-indigo-900/30' },
   ];
 

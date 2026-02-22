@@ -6,7 +6,11 @@ import api from '@/lib/api';
 import { Plus, Search, Edit2, Trash2, X, Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
 
+import { useCurrency } from '@/context/CurrencyContext';
+import { formatCurrency } from '@/lib/currency';
+
 export default function ItemsPage() {
+  const currency = useCurrency();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,7 +115,7 @@ export default function ItemsPage() {
                   <div className="text-sm text-gray-500">{item.description || "No description"}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-bold text-gray-900 dark:text-white">${item.price.toFixed(2)}</div>
+                  <div className="text-sm font-bold text-gray-900 dark:text-white">{formatCurrency(item.price, currency)}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {format(new Date(item.createdAt), 'MMM dd, yyyy')}
@@ -174,7 +178,7 @@ export default function ItemsPage() {
                       <input {...register('name', { required: true })} type="text" className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent !text-gray-900 dark:!text-white" />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Base Price ($) <span className="text-red-500">*</span></label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Base Price ({currency}) <span className="text-red-500">*</span></label>
                       <input {...register('price', { required: true, min: 0, valueAsNumber: false })} type="number" step="0.01" className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent !text-gray-900 dark:!text-white" />
                     </div>
                     <div>

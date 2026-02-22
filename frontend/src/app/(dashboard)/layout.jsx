@@ -8,6 +8,8 @@ import Sidebar from '@/components/layout/Sidebar';
 import { Loader2, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 
+import { CurrencyContext } from '@/context/CurrencyContext';
+
 // Define route access permissions
 // If a route prefix isn't in this list, it defaults to allowing both admin and staff.
 const ROUTE_PERMISSIONS = {
@@ -85,7 +87,9 @@ export default function DashboardLayout({ children }) {
         <main className="flex-1 relative overflow-y-auto focus:outline-none">
           <div className="py-6 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
             {hasAccess ? (
-              children
+              <CurrencyContext.Provider value={user?.organization?.currency || 'USD'}>
+                {children}
+              </CurrencyContext.Provider>
             ) : (
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
                 <AlertTriangle className="h-16 w-16 text-yellow-500 mb-4" />

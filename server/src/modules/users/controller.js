@@ -148,12 +148,15 @@ export const getUsers = async (req, res) => {
 // PATCH /users/organization
 export const updateOrganization = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, currency } = req.body;
     if (!name) return res.status(400).json({ error: "Name is required" });
 
     const updatedOrg = await prisma.organization.update({
       where: { id: req.user.organizationId },
-      data: { name }
+      data: { 
+        name,
+        ...(currency && { currency: currency.toUpperCase() })
+      }
     });
 
     res.status(200).json({ organization: updatedOrg });
