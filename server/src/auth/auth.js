@@ -4,8 +4,8 @@ import { admin, organization } from "better-auth/plugins";
 import { prisma } from "../config/db.js";
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:8080/api/auth",
-  trustedOrigins: [process.env.FRONTEND_URL || "http://localhost:3000"],
+  baseURL: process.env.BETTER_AUTH_URL,
+  trustedOrigins: [process.env.FRONTEND_URL].filter(Boolean),
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
