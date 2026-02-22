@@ -4,13 +4,7 @@ import { prisma } from "../config/db.js";
 export const requireAuth = async (req, res, next) => {
   try {
     // Debug: log cookies and key headers on the server
-    console.log("Auth Debug - Request details:", {
-      url: req.originalUrl,
-      origin: req.headers.origin,
-      cookie: req.headers.cookie ? "Present" : "Missing",
-      host: req.headers.host,
-      proto: req.headers["x-forwarded-proto"]
-    });
+    console.log(`Auth Debug - URL: ${req.originalUrl}, Cookie: ${req.headers.cookie ? 'Present' : 'Missing'}, Origin: ${req.headers.origin}, Host: ${req.headers.host}`);
 
     // Get session from Better Auth
     const authSession = await auth.api.getSession({
