@@ -6,13 +6,11 @@ import { prisma } from "../config/db.js";
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
   trustedOrigins: [
-    process.env.FRONTEND_URL,
-    process.env.BASE_URL,
-    "http://localhost:3000",
-    "http://localhost:8080",
+    "https://invoicify-green.vercel.app",
     "https://invoicify-rho.vercel.app",
-    "https://invoicify-green.vercel.app"
-  ].filter(Boolean),
+    "http://localhost:3000",
+    "http://localhost:8080"
+  ],
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
@@ -53,9 +51,10 @@ export const auth = betterAuth({
     level: "debug"
   },
   advanced: {
+    useSecureCookies: true,
     cookieOptions: {
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      secure: process.env.NODE_ENV === "production" ? true : false,
+      sameSite: "none",
+      secure: true,
     }
   }
 });
