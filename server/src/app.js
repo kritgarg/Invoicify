@@ -14,6 +14,8 @@ import dashboardRoutes from "./modules/dashboard/routes.js";
 
 const app = express();
 
+app.set("trust proxy", true);
+
 app.use(cors({
   origin: (origin, callback) => {
     // Allow all origins
