@@ -38,8 +38,8 @@ export default function Topbar({ user }) {
   return (
     <header className="flex items-center justify-between w-full h-24 px-8 pt-4">
       <div className="flex items-center space-x-2">
-        <div className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full">
-          <span className="text-xl font-bold font-sans tracking-tight text-gray-900 dark:text-white">Invoicify</span>
+        <div className="px-4 py-2 border border-gray-300 rounded-full">
+          <span className="text-xl font-bold font-sans tracking-tight text-gray-900">Invoicify</span>
         </div>
       </div>
       
@@ -57,8 +57,8 @@ export default function Topbar({ user }) {
                   className={clsx(
                     "px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 backdrop-blur-md",
                     active 
-                      ? "bg-gray-900 text-white shadow-md dark:bg-gray-100 dark:text-gray-900" 
-                      : "text-gray-600 hover:bg-white/50 dark:text-gray-300 dark:hover:bg-gray-800/50"
+                      ? "bg-[#2b2b2b] text-white shadow-md border border-gray-900" 
+                      : "text-gray-600 hover:bg-white/70 hover:shadow-sm border border-transparent"
                   )}
                 >
                   {route.name}
@@ -69,16 +69,16 @@ export default function Topbar({ user }) {
 
         {/* Action Icons */}
         <div className="flex items-center gap-3">
-          <button className="p-3 bg-white/40 dark:bg-gray-800/40 backdrop-blur-md rounded-full shadow-sm hover:bg-white/60 dark:hover:bg-gray-700/50 transition border border-white/20">
-            <Bell className="w-5 h-5 text-gray-800 dark:text-gray-200" />
+          <button className="p-3 bg-white/70 backdrop-blur-3xl rounded-full shadow-sm hover:bg-white/90 transition border border-gray-900/10">
+            <Bell className="w-5 h-5 text-gray-800" />
           </button>
           
-          <button className="p-3 bg-white/40 dark:bg-gray-800/40 backdrop-blur-md rounded-full shadow-sm hover:bg-white/60 dark:hover:bg-gray-700/50 transition border border-white/20">
-            <User className="w-5 h-5 text-gray-800 dark:text-gray-200" />
+          <button className="p-3 bg-white/70 backdrop-blur-3xl rounded-full shadow-sm hover:bg-white/90 transition border border-gray-900/10">
+            <User className="w-5 h-5 text-gray-800" />
           </button>
 
-          <button onClick={handleLogout} className="p-3 bg-white/40 dark:bg-gray-800/40 backdrop-blur-md rounded-full shadow-sm hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-900/50 transition border border-white/20">
-            <LogOut className="w-5 h-5 text-gray-800 dark:text-gray-200 hover:text-red-600" />
+          <button onClick={handleLogout} className="p-3 bg-white/70 backdrop-blur-3xl rounded-full shadow-sm hover:bg-red-100 hover:text-red-600 transition border border-gray-900/10">
+            <LogOut className="w-5 h-5 text-gray-800 hover:text-red-600" />
           </button>
         </div>
       </div>

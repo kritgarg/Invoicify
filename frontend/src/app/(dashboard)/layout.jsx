@@ -46,7 +46,7 @@ export default function DashboardLayout({ children }) {
 
   if (loading) {
     return (
-      <div className="flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="flex h-screen w-full items-center justify-center bg-gray-50">
         <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
       </div>
     );
@@ -54,11 +54,11 @@ export default function DashboardLayout({ children }) {
 
   if (user?.isDeactivated) {
     return (
-      <div className="flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
-        <div className="text-center max-w-md bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+      <div className="flex h-screen w-full items-center justify-center bg-gray-50 px-4">
+        <div className="text-center max-w-md bg-white p-8 rounded-xl shadow-lg border border-gray-200">
           <AlertTriangle className="h-16 w-16 text-red-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Access Denied</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h2>
+          <p className="text-gray-600 mb-6">
             Your account has been deactivated. Please contact your administrator.
           </p>
           <button 
@@ -93,8 +93,8 @@ export default function DashboardLayout({ children }) {
             ) : (
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
                 <AlertTriangle className="h-16 w-16 text-yellow-500 mb-4" />
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Access Denied</h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h2>
+                <p className="text-gray-600 mb-6">
                   You do not have permission to view this page.
                 </p>
                 <Link 

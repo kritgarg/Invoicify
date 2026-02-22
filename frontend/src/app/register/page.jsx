@@ -54,46 +54,46 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
-      <div className="w-full max-w-md space-y-8 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
+      <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-2xl shadow-xl">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">Create Account</h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Join to start managing invoices</p>
+          <h2 className="text-3xl font-extrabold text-gray-900">Create Account</h2>
+          <p className="mt-2 text-sm text-gray-600">Join to start managing invoices</p>
         </div>
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          {error && <div className="p-3 text-sm text-red-500 bg-red-50 dark:bg-red-900/30 rounded-lg">{error}</div>}
+          {error && <div className="p-3 text-sm text-red-500 bg-red-50 rounded-lg">{error}</div>}
           
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
+              <label className="block text-sm font-medium text-gray-700">Full Name</label>
               <input
                 {...register('name')}
                 suppressHydrationWarning
                 type="text"
-                className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent dark:text-white focus:ring-2 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 bg-transparent focus:ring-2 focus:ring-indigo-500"
               />
               {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
               <input
                 {...register('email')}
                 suppressHydrationWarning
                 type="email"
-                className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent dark:text-white focus:ring-2 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 bg-transparent focus:ring-2 focus:ring-indigo-500"
               />
               {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+              <label className="block text-sm font-medium text-gray-700">Password</label>
               <input
                 {...register('password')}
                 suppressHydrationWarning
                 type="password"
-                className="mt-1 block w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 bg-transparent dark:text-white focus:ring-2 focus:ring-indigo-500"
+                className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 bg-transparent focus:ring-2 focus:ring-indigo-500"
               />
               {errors.password && <p className="mt-1 text-xs text-red-500">{errors.password.message}</p>}
             </div>
@@ -108,7 +108,7 @@ export default function RegisterPage() {
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-center text-sm text-gray-600">
           Already have an account?{' '}
           <Link href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
             Sign in

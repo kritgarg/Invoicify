@@ -61,14 +61,14 @@ export default function ReportsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-4xl font-light text-gray-900 dark:text-white tracking-tight">Reports &amp; Analytics</h1>
+        <h1 className="text-4xl font-light text-gray-900 tracking-tight">Reports &amp; Analytics</h1>
         
-        <div className="flex items-center space-x-2 bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl p-2 border border-white/50 dark:border-white/10 rounded-full shadow-sm">
-          <Calendar className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+        <div className="flex items-center space-x-2 bg-white/70 backdrop-blur-3xl p-2 border border-gray-900/10 rounded-full shadow-sm">
+          <Calendar className="w-5 h-5 text-gray-500" />
           <select 
             value={range} 
             onChange={(e) => setRange(e.target.value)}
-            className="bg-transparent border-none text-sm font-medium focus:ring-0 text-gray-700 dark:text-gray-200 outline-none cursor-pointer"
+            className="bg-transparent border-none text-sm font-medium focus:ring-0 text-gray-700 outline-none cursor-pointer"
           >
             <option value="7d">Last 7 Days</option>
             <option value="30d">Last 30 Days</option>
@@ -80,23 +80,23 @@ export default function ReportsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Total Revenue Summary */}
-        <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl p-8 rounded-[32px] shadow-sm border border-white/50 dark:border-white/10 hover:shadow-lg hover:bg-white/50 transition-all duration-300">
-          <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2 pb-4 border-b border-gray-100 dark:border-gray-700">
+        <div className="bg-white/70 backdrop-blur-3xl p-8 rounded-[32px] shadow-sm border border-gray-900/10 hover:shadow-lg hover:bg-white/90 transition-all duration-300">
+          <h2 className="text-lg font-medium text-gray-900 mb-2 pb-4 border-b border-gray-100">
             Total Revenue ({range === 'all' ? 'All Time' : `Last ${range.replace('d', ' Days')}`})
           </h2>
           <div className="mt-6 flex flex-col justify-center items-center h-48">
-            <span className="text-gray-500 dark:text-gray-400 text-sm mb-2">Collected Income</span>
+            <span className="text-gray-500 text-sm mb-2">Collected Income</span>
             {loading ? (
-              <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-10 w-32 rounded"></div>
+              <div className="animate-pulse bg-gray-200 h-10 w-32 rounded"></div>
             ) : (
-              <span className="text-5xl font-extrabold text-indigo-600 dark:text-indigo-400">{formatCurrency(revenue, currency)}</span>
+              <span className="text-5xl font-extrabold text-indigo-600">{formatCurrency(revenue, currency)}</span>
             )}
           </div>
         </div>
 
         {/* Invoice Status Distribution */}
-        <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl p-8 rounded-[32px] shadow-sm border border-white/50 dark:border-white/10 hover:shadow-lg hover:bg-white/50 transition-all duration-300">
-          <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-6">Invoice Status Distribution</h2>
+        <div className="bg-white/70 backdrop-blur-3xl p-8 rounded-[32px] shadow-sm border border-gray-900/10 hover:shadow-lg hover:bg-white/90 transition-all duration-300">
+          <h2 className="text-lg font-medium text-gray-900 mb-6">Invoice Status Distribution</h2>
           <div className="h-64">
             {invoiceStatusData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">

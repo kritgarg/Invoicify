@@ -87,7 +87,7 @@ export default function InvoiceDetailPage() {
   if (!invoice) {
     return (
       <div className="text-center py-12">
-        <h2 className="text-xl text-gray-600 dark:text-gray-400">Invoice not found.</h2>
+        <h2 className="text-xl text-gray-600">Invoice not found.</h2>
         <button onClick={() => router.back()} className="mt-4 text-indigo-600">Go Back</button>
       </div>
     );
@@ -101,10 +101,10 @@ export default function InvoiceDetailPage() {
     <div className="space-y-6 max-w-5xl mx-auto">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <Link href="/invoices" className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+          <Link href="/invoices" className="text-gray-500 hover:text-gray-700:text-gray-300">
             <ArrowLeft className="h-6 w-6" />
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-2xl font-bold text-gray-900">
             Invoice #{invoice.id.slice(-6).toUpperCase()}
           </h1>
           <span className={clsx(
@@ -121,7 +121,7 @@ export default function InvoiceDetailPage() {
           <PDFDownloadLink
             document={<InvoicePDF invoice={invoice} organization={organization} />}
             fileName={`Invoice-${invoice.id.slice(-6).toUpperCase()}.pdf`}
-            className="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none"
+            className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50:bg-gray-700 focus:outline-none"
           >
             {({ blob, url, loading, error }) => loading ? 'Generating PDF...' : (
               <>
@@ -132,27 +132,27 @@ export default function InvoiceDetailPage() {
         </div>
       </div>
 
-      <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl shadow-sm rounded-[32px] overflow-hidden border border-white/50 dark:border-white/10 p-8">
+      <div className="bg-white/70 backdrop-blur-3xl shadow-sm rounded-[32px] overflow-hidden border border-gray-900/10 p-8">
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div>
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Bill To</h3>
-            <p className="text-lg font-bold text-gray-900 dark:text-white">{invoice.customer.name}</p>
-            <p className="text-sm text-gray-600 dark:text-gray-300">{invoice.customer.email}</p>
-            <p className="text-sm text-gray-600 dark:text-gray-300 whitespace-pre-wrap">{invoice.customer.address}</p>
+            <h3 className="text-sm font-medium text-gray-500 mb-1">Bill To</h3>
+            <p className="text-lg font-bold text-gray-900">{invoice.customer.name}</p>
+            <p className="text-sm text-gray-600">{invoice.customer.email}</p>
+            <p className="text-sm text-gray-600 whitespace-pre-wrap">{invoice.customer.address}</p>
           </div>
           <div className="text-right text-sm">
             <div className="mb-2">
-              <span className="text-gray-500 dark:text-gray-400 mr-2">Issue Date:</span>
-              <span className="font-medium text-gray-900 dark:text-white">{format(new Date(invoice.issueDate), 'MMM d, yyyy')}</span>
+              <span className="text-gray-500 mr-2">Issue Date:</span>
+              <span className="font-medium text-gray-900">{format(new Date(invoice.issueDate), 'MMM d, yyyy')}</span>
             </div>
             <div>
-              <span className="text-gray-500 dark:text-gray-400 mr-2">Due Date:</span>
-              <span className="font-medium text-gray-900 dark:text-white">{format(new Date(invoice.dueDate), 'MMM d, yyyy')}</span>
+              <span className="text-gray-500 mr-2">Due Date:</span>
+              <span className="font-medium text-gray-900">{format(new Date(invoice.dueDate), 'MMM d, yyyy')}</span>
             </div>
           </div>
         </div>
 
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 mb-8">
+        <table className="min-w-full divide-y divide-gray-200 mb-8">
           <thead>
             <tr>
               <th className="py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
@@ -161,38 +161,38 @@ export default function InvoiceDetailPage() {
               <th className="py-3 text-right text-xs font-medium text-gray-500 uppercase">Total</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+          <tbody className="divide-y divide-gray-200">
             {invoice.items.map((item, idx) => (
               <tr key={idx}>
-                <td className="py-4 text-sm text-gray-900 dark:text-white">{item.description}</td>
-                <td className="py-4 text-sm text-right text-gray-900 dark:text-white">{item.quantity}</td>
-                <td className="py-4 text-sm text-right text-gray-900 dark:text-white">{formatCurrency(item.price, currency)}</td>
-                <td className="py-4 text-sm text-right font-medium text-gray-900 dark:text-white">{formatCurrency(item.total, currency)}</td>
+                <td className="py-4 text-sm text-gray-900">{item.description}</td>
+                <td className="py-4 text-sm text-right text-gray-900">{item.quantity}</td>
+                <td className="py-4 text-sm text-right text-gray-900">{formatCurrency(item.price, currency)}</td>
+                <td className="py-4 text-sm text-right font-medium text-gray-900">{formatCurrency(item.total, currency)}</td>
               </tr>
             ))}
           </tbody>
-          <tfoot className="border-t-2 border-gray-200 dark:border-gray-700">
+          <tfoot className="border-t-2 border-gray-200">
             <tr>
               <td colSpan="3" className="py-3 text-right text-sm font-medium text-gray-500">Subtotal:</td>
-              <td className="py-3 text-right text-sm font-medium text-gray-900 dark:text-white">{formatCurrency(invoice.subtotal, currency)}</td>
+              <td className="py-3 text-right text-sm font-medium text-gray-900">{formatCurrency(invoice.subtotal, currency)}</td>
             </tr>
             {invoice.tax > 0 && (
               <tr>
                 <td colSpan="3" className="py-3 text-right text-sm font-medium text-gray-500">Tax:</td>
-                <td className="py-3 text-right text-sm font-medium text-gray-900 dark:text-white">{formatCurrency(invoice.tax, currency)}</td>
+                <td className="py-3 text-right text-sm font-medium text-gray-900">{formatCurrency(invoice.tax, currency)}</td>
               </tr>
             )}
             <tr>
-              <td colSpan="3" className="py-3 text-right text-base font-bold text-gray-900 dark:text-white">Total:</td>
-              <td className="py-3 text-right text-base font-bold text-indigo-600 dark:text-indigo-400">{formatCurrency(invoice.total, currency)}</td>
+              <td colSpan="3" className="py-3 text-right text-base font-bold text-gray-900">Total:</td>
+              <td className="py-3 text-right text-base font-bold text-indigo-600">{formatCurrency(invoice.total, currency)}</td>
             </tr>
           </tfoot>
         </table>
       </div>
 
-      <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl shadow-sm rounded-[32px] overflow-hidden border border-white/50 dark:border-white/10">
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Payment History</h3>
+      <div className="bg-white/70 backdrop-blur-3xl shadow-sm rounded-[32px] overflow-hidden border border-gray-900/10">
+        <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+          <h3 className="text-lg font-medium text-gray-900">Payment History</h3>
           <button 
             onClick={() => setIsPaymentModalOpen(true)}
             className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
@@ -200,13 +200,13 @@ export default function InvoiceDetailPage() {
             <Plus className="mr-1 h-4 w-4" /> Add Payment
           </button>
         </div>
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+        <ul className="divide-y divide-gray-200">
           {invoice.payments?.length > 0 ? invoice.payments.map((payment) => (
-            <li key={payment.id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50">
+            <li key={payment.id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50:bg-gray-700/50">
               <div className="flex items-center">
                 <CreditCard className="h-5 w-5 text-gray-400 mr-3" />
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{formatCurrency(payment.amount, currency)}</p>
+                  <p className="text-sm font-medium text-gray-900">{formatCurrency(payment.amount, currency)}</p>
                   <p className="text-xs text-gray-500">{format(new Date(payment.paymentDate), 'MMM d, yyyy h:mm a')} • {payment.method}</p>
                 </div>
               </div>
@@ -224,21 +224,21 @@ export default function InvoiceDetailPage() {
         <div className="fixed z-50 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 transition-opacity" aria-hidden="true" onClick={() => setIsPaymentModalOpen(false)}>
-              <div className="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div className="inline-block align-bottom bg-white/60 dark:bg-gray-800/60 backdrop-blur-3xl rounded-[32px] border border-white/50 dark:border-white/10 text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="inline-block align-bottom bg-white/90 backdrop-blur-3xl rounded-[32px] border border-gray-900/10 text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <form onSubmit={handleSubmit(onAddPayment)}>
                 <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-4">Record Payment</h3>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">Record Payment</h3>
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Amount</label>
-                      <input type="number" step="0.01" {...register('amount', { required: true })} className="mt-1 block w-full rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 shadow-sm focus:ring-indigo-500 py-2 px-3 border dark:text-white" />
+                      <label className="block text-sm font-medium text-gray-700">Amount</label>
+                      <input type="number" step="0.01" {...register('amount', { required: true })} className="mt-1 block w-full rounded border-gray-300 bg-white shadow-sm focus:ring-indigo-500 py-2 px-3 border" />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Method</label>
-                      <select {...register('method', { required: true })} className="mt-1 block w-full rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 shadow-sm focus:ring-indigo-500 py-2 px-3 border dark:text-white">
+                      <label className="block text-sm font-medium text-gray-700">Method</label>
+                      <select {...register('method', { required: true })} className="mt-1 block w-full rounded border-gray-300 bg-white shadow-sm focus:ring-indigo-500 py-2 px-3 border">
                         <option value="BANK_TRANSFER">Bank Transfer</option>
                         <option value="CREDIT_CARD">Credit Card</option>
                         <option value="CASH">Cash</option>
@@ -248,11 +248,11 @@ export default function InvoiceDetailPage() {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 dark:bg-gray-700/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                   <button type="submit" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
                     Save Payment
                   </button>
-                  <button type="button" onClick={() => setIsPaymentModalOpen(false)} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                  <button type="button" onClick={() => setIsPaymentModalOpen(false)} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50:bg-gray-700 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                     Cancel
                   </button>
                 </div>

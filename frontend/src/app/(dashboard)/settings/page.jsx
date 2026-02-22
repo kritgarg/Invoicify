@@ -61,22 +61,22 @@ export default function SettingsPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Settings</h1>
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Manage your business and organization details.</p>
+        <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
+        <p className="mt-1 text-sm text-gray-500">Manage your business and organization details.</p>
       </div>
 
-      <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl shadow-sm rounded-[32px] overflow-hidden border border-white/50 dark:border-white/10 p-8">
+      <div className="bg-white/70 backdrop-blur-3xl shadow-sm rounded-[32px] overflow-hidden border border-gray-900/10 p-8">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">Organization Details</h3>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">Organization Details</h3>
+            <p className="mt-1 text-sm text-gray-500">
               This information is displayed publicly on elements like your invoice PDFs.
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div className="sm:col-span-4">
-              <label htmlFor="organizationName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="organizationName" className="block text-sm font-medium text-gray-700">
                 Organization Name
               </label>
               <div className="mt-1">
@@ -84,21 +84,21 @@ export default function SettingsPage() {
                   type="text"
                   id="organizationName"
                   {...register('organizationName', { required: true })}
-                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md py-2 px-3 bg-white text-gray-900"
                   placeholder="Acme Corp"
                 />
               </div>
             </div>
 
             <div className="sm:col-span-4">
-              <label htmlFor="currency" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="currency" className="block text-sm font-medium text-gray-700">
                 Base Currency
               </label>
               <div className="mt-1">
                 <select
                   id="currency"
                   {...register('currency', { required: true })}
-                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 rounded-md py-2 px-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md py-2 px-3 bg-white text-gray-900"
                 >
                   <option value="USD">USD ($)</option>
                   <option value="INR">INR (₹)</option>
@@ -114,7 +114,7 @@ export default function SettingsPage() {
             </div>
           )}
 
-          <div className="flex justify-end pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex justify-end pt-4 border-t border-gray-200">
             <button
               type="submit"
               disabled={isSaving}

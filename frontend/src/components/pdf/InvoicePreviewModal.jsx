@@ -44,16 +44,16 @@ export default function InvoicePreviewModal({ invoiceId, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-gray-900/75">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-5xl h-[90vh] flex flex-col overflow-hidden">
-        <div className="flex-shrink-0 flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-5xl h-[90vh] flex flex-col overflow-hidden">
+        <div className="flex-shrink-0 flex justify-between items-center px-6 py-4 border-b border-gray-200">
+          <h3 className="text-xl font-semibold text-gray-900">
             Invoice Preview {invoice ? `- #${invoice.id.slice(-6).toUpperCase()}` : ''}
           </h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-500 transition-colors">
             <X className="h-6 w-6" />
           </button>
         </div>
-        <div className="flex-1 bg-gray-100 dark:bg-gray-900 relative">
+        <div className="flex-1 bg-gray-100 relative">
           {loading ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-500">
               <Loader2 className="h-10 w-10 animate-spin text-indigo-600 mb-4" />

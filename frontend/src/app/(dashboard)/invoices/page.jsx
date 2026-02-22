@@ -150,7 +150,7 @@ export default function InvoicesPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Invoices</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Invoices</h1>
         <button
           onClick={() => { 
             setEditingInvoiceId(null);
@@ -175,7 +175,7 @@ export default function InvoicesPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="block w-48 pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="block w-48 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-white text-gray-900"
         >
           <option value="">All Statuses</option>
           <option value="DRAFT">Draft</option>
@@ -185,9 +185,9 @@ export default function InvoicesPage() {
         </select>
       </div>
 
-      <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl shadow-sm rounded-[32px] overflow-hidden border border-white/50 dark:border-white/10">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-          <thead className="bg-gray-50 dark:bg-gray-900/50">
+      <div className="bg-white/70 backdrop-blur-3xl shadow-sm rounded-[32px] overflow-hidden border border-gray-900/10">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Invoice / Client</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
@@ -196,15 +196,15 @@ export default function InvoicesPage() {
               <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+          <tbody className="bg-white divide-y divide-gray-200">
             {invoices.map((invoice) => (
-              <tr key={invoice.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+              <tr key={invoice.id} className="hover:bg-gray-50:bg-gray-700/50">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900 dark:text-white">#{invoice.id.slice(-6).toUpperCase()}</div>
+                  <div className="text-sm font-medium text-gray-900">#{invoice.id.slice(-6).toUpperCase()}</div>
                   <div className="text-sm text-gray-500">{invoice.customer.name}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-bold text-gray-900 dark:text-white">{formatCurrency(invoice.total, currency)}</div>
+                  <div className="text-sm font-bold text-gray-900">{formatCurrency(invoice.total, currency)}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <div>Iss: {format(new Date(invoice.issueDate), 'MMM dd, yyyy')}</div>
@@ -233,13 +233,13 @@ export default function InvoicesPage() {
                   <div className="flex justify-end items-center space-x-2">
                     <button 
                       onClick={() => openEditModal(invoice)}
-                      className="inline-flex items-center px-2 py-1 border border-gray-300 text-gray-700 dark:border-gray-600 dark:text-gray-300 rounded text-xs hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                      className="inline-flex items-center px-2 py-1 border border-gray-300 text-gray-700 rounded text-xs hover:bg-gray-50:bg-gray-700 transition-colors"
                     >
                       Edit
                     </button>
                     <button 
                       onClick={() => setPreviewInvoiceId(invoice.id)}
-                      className="inline-flex items-center px-2 py-1 border border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 rounded text-xs hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-colors"
+                      className="inline-flex items-center px-2 py-1 border border-indigo-600 text-indigo-600 rounded text-xs hover:bg-indigo-50:bg-indigo-900/30 transition-colors"
                     >
                       Generate
                     </button>
@@ -272,9 +272,9 @@ export default function InvoicesPage() {
               <div className="absolute inset-0 bg-gray-900 opacity-75"></div>
             </div>
 
-            <div className="relative flex flex-col bg-white/60 dark:bg-gray-800/60 backdrop-blur-3xl rounded-[32px] border border-white/50 dark:border-white/10 text-left shadow-2xl transform transition-all sm:my-8 w-full max-w-4xl max-h-[90vh]" role="dialog">
-              <div className="flex-shrink-0 flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{editingInvoiceId ? 'Edit Invoice' : 'Create Invoice'}</h3>
+            <div className="relative flex flex-col bg-white/90 backdrop-blur-3xl rounded-[32px] border border-gray-900/10 text-left shadow-2xl transform transition-all sm:my-8 w-full max-w-4xl max-h-[90vh]" role="dialog">
+              <div className="flex-shrink-0 flex justify-between items-center px-6 py-4 border-b border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900">{editingInvoiceId ? 'Edit Invoice' : 'Create Invoice'}</h3>
                 <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-500">
                   <X className="h-6 w-6" />
                 </button>
@@ -285,26 +285,26 @@ export default function InvoicesPage() {
                   
                   <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-3">
                     <div className="sm:col-span-1">
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Customer</label>
-                      <select {...register('customerId', { required: true })} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border">
+                      <label className="block text-sm font-medium text-gray-700">Customer</label>
+                      <select {...register('customerId', { required: true })} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white text-gray-900 border">
                         <option value="">Select a customer...</option>
                         {customers.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                       </select>
                     </div>
 
                     <div className="sm:col-span-1">
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Issue Date</label>
-                      <input type="date" {...register('issueDate')} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border" />
+                      <label className="block text-sm font-medium text-gray-700">Issue Date</label>
+                      <input type="date" {...register('issueDate')} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white text-gray-900 border" />
                     </div>
 
                     <div className="sm:col-span-1">
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Due Date</label>
-                      <input type="date" {...register('dueDate')} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border" />
+                      <label className="block text-sm font-medium text-gray-700">Due Date</label>
+                      <input type="date" {...register('dueDate')} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white text-gray-900 border" />
                     </div>
 
                     <div className="sm:col-span-1">
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
-                      <select {...register('status')} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border">
+                      <label className="block text-sm font-medium text-gray-700">Status</label>
+                      <select {...register('status')} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white text-gray-900 border">
                         <option value="DRAFT">Draft</option>
                         <option value="SENT">Sent</option>
                         <option value="PAID">Paid</option>
@@ -315,32 +315,32 @@ export default function InvoicesPage() {
 
                   {/* Line Items */}
                   <div className="mt-8">
-                    <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Line Items</h4>
+                    <h4 className="text-sm font-medium text-gray-900 mb-2">Line Items</h4>
                     <div className="space-y-3">
                       {fields.map((field, index) => (
                         <div key={field.id} className="flex gap-3 items-start">
                           <div className="w-1/4">
                             <select 
                               onChange={(e) => handleItemSelect(index, e.target.value)}
-                              className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white border mb-1"
+                              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-white text-gray-900 border mb-1"
                             >
                               <option value="">(Template Item)</option>
                               {itemsList.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
                             </select>
                           </div>
                           <div className="flex-1">
-                            <input {...register(`items.${index}.description`, { required: true })} placeholder="Custom description..." className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-transparent text-gray-900 dark:text-white border" />
+                            <input {...register(`items.${index}.description`, { required: true })} placeholder="Custom description..." className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3 bg-transparent text-gray-900 border" />
                           </div>
                           <div className="w-24">
-                            <input {...register(`items.${index}.quantity`)} type="number" min="1" step="0.01" placeholder="Qty" className="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-2 bg-transparent text-gray-900 dark:text-white border" />
+                            <input {...register(`items.${index}.quantity`)} type="number" min="1" step="0.01" placeholder="Qty" className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-2 bg-transparent text-gray-900 border" />
                           </div>
                           <div className="w-32">
-                            <div className="flex bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm">
+                            <div className="flex bg-white border border-gray-300 rounded-md shadow-sm">
                               <span className="flex items-center pl-3 text-gray-500 sm:text-sm">{getCurrencySymbol(currency)}</span>
-                              <input {...register(`items.${index}.price`)} type="number" min="0" step="0.01" className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm py-2 px-2 border-0 bg-transparent text-gray-900 dark:text-white" />
+                              <input {...register(`items.${index}.price`)} type="number" min="0" step="0.01" className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm py-2 px-2 border-0 bg-transparent text-gray-900" />
                             </div>
                           </div>
-                          <button type="button" onClick={() => remove(index)} className="p-2 text-red-500 hover:text-red-700 bg-red-50 dark:bg-red-900/20 rounded-md">
+                          <button type="button" onClick={() => remove(index)} className="p-2 text-red-500 hover:text-red-700 bg-red-50 rounded-md">
                             <Trash2 className="w-5 h-5" />
                           </button>
                         </div>
@@ -351,21 +351,21 @@ export default function InvoicesPage() {
                     </button>
                   </div>
 
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6 mt-6 pb-8">
+                  <div className="border-t border-gray-200 pt-6 mt-6 pb-8">
                     <div className="flex justify-end">
                       <div className="w-64 space-y-3 text-sm">
-                        <div className="flex justify-between items-end text-gray-700 dark:text-gray-300">
+                        <div className="flex justify-between items-end text-gray-700">
                           <span>Subtotal</span>
                           <span className="font-medium">{formatCurrency(subtotal, currency)}</span>
                         </div>
-                        <div className="flex justify-between items-center text-gray-700 dark:text-gray-300">
+                        <div className="flex justify-between items-center text-gray-700">
                           <div className="flex items-center">
                             Tax 
-                            <input {...register('taxRate')} type="number" step="0.1" className="w-16 ml-2 px-1 py-0.5 border border-gray-300 dark:border-gray-600 rounded bg-transparent text-right" />%
+                            <input {...register('taxRate')} type="number" step="0.1" className="w-16 ml-2 px-1 py-0.5 border border-gray-300 rounded bg-transparent text-right" />%
                           </div>
                           <span className="font-medium">{formatCurrency(tax, currency)}</span>
                         </div>
-                        <div className="flex justify-between items-end border-t border-gray-200 dark:border-gray-600 pt-3 text-lg font-bold text-gray-900 dark:text-white">
+                        <div className="flex justify-between items-end border-t border-gray-200 pt-3 text-lg font-bold text-gray-900">
                           <span>Total</span>
                           <span>{formatCurrency(total, currency)}</span>
                         </div>
@@ -376,8 +376,8 @@ export default function InvoicesPage() {
                 </form>
               </div>
               
-              <div className="flex-shrink-0 px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 rounded-b-xl flex justify-end gap-3">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50">
+              <div className="flex-shrink-0 px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-xl flex justify-end gap-3">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50">
                   Cancel
                 </button>
                 <button type="submit" form="invoiceForm" className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
