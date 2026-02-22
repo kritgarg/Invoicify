@@ -8,6 +8,7 @@ export const auth = betterAuth({
   trustedOrigins: [
     "https://invoicify-green.vercel.app",
     "https://invoicify-rho.vercel.app",
+    "https://invoicify-c7fc.vercel.app",
     "http://localhost:3000",
     "http://localhost:8080"
   ],
@@ -51,10 +52,10 @@ export const auth = betterAuth({
     level: "debug"
   },
   advanced: {
-    useSecureCookies: process.env.NODE_ENV === "production",
+    useSecureCookies: process.env.BETTER_AUTH_URL?.startsWith('https'),
     cookieOptions: {
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.BETTER_AUTH_URL?.startsWith('https') ? "none" : "lax",
+      secure: process.env.BETTER_AUTH_URL?.startsWith('https'),
       httpOnly: true,
     }
   },
