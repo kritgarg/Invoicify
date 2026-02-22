@@ -12,6 +12,7 @@ import { Banknote, FileText, Activity } from 'lucide-react';
 import clsx from 'clsx';
 import { useCurrency } from '@/context/CurrencyContext';
 import { formatCurrency } from '@/lib/currency';
+import { getSession } from '@/lib/auth';
 
 export default function Dashboard() {
   const currency = useCurrency();
@@ -23,16 +24,18 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const [sumRes, revRes, userRes] = await Promise.all([
+        const [sumRes, revRes, session] = await Promise.all([
           api.get('/dashboard/summary'),
           api.get('/dashboard/revenue?range=30d'),
-          api.get('/auth/me')
+          getSession()
         ]);
         setSummary(sumRes.data);
         setRevenue(revRes.data);
-        setUser(userRes.data?.user);
+        setUser(session?.user);
       } catch (err) {
-        console.error('Failed to load dashboard', err);
+        if (err?.response?.status !== 401) {
+          console.error('Failed to load dashboard', err);
+        }
       } finally {
         setLoading(false);
       }
