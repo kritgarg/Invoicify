@@ -10,7 +10,8 @@ export const auth = betterAuth({
     process.env.BASE_URL,
     "http://localhost:3000",
     "http://localhost:8080",
-    "https://invoicify-rho.vercel.app"
+    "https://invoicify-rho.vercel.app",
+    "https://invoicify-green.vercel.app"
   ].filter(Boolean),
   database: prismaAdapter(prisma, {
     provider: "postgresql",
