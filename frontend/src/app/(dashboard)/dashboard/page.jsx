@@ -17,17 +17,20 @@ export default function Dashboard() {
   const currency = useCurrency();
   const [summary, setSummary] = useState({ totalRevenue: 0, totalPending: 0, invoiceCount: 0 });
   const [revenue, setRevenue] = useState([]);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const [sumRes, revRes] = await Promise.all([
+        const [sumRes, revRes, userRes] = await Promise.all([
           api.get('/dashboard/summary'),
-          api.get('/dashboard/revenue?range=30d')
+          api.get('/dashboard/revenue?range=30d'),
+          api.get('/auth/me')
         ]);
         setSummary(sumRes.data);
         setRevenue(revRes.data);
+        setUser(userRes.data?.user);
       } catch (err) {
         console.error('Failed to load dashboard', err);
       } finally {
@@ -39,62 +42,55 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="space-y-6 animate-pulse">
-        <div className="flex justify-between items-center mb-6">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></div>
-          <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
-        </div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+      <div className="space-y-6 animate-pulse px-4 md:px-0">
+        <div className="h-12 bg-gray-200/50 dark:bg-gray-700/50 rounded-xl w-1/3 mb-10"></div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-32 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+            <div key={i} className="h-40 bg-gray-200/50 dark:bg-gray-700/50 rounded-3xl"></div>
           ))}
         </div>
-        <div className="mt-8 h-96 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+        <div className="mt-8 h-96 bg-gray-200/50 dark:bg-gray-700/50 rounded-3xl"></div>
       </div>
     );
   }
 
   const stats = [
-    { name: 'Total Revenue', value: formatCurrency(summary.totalRevenue, currency), icon: Banknote, color: 'text-green-500', bg: 'bg-green-100 dark:bg-green-900/30' },
-    { name: 'Total Pending', value: formatCurrency(summary.totalPending, currency), icon: Activity, color: 'text-amber-500', bg: 'bg-amber-100 dark:bg-amber-900/30' },
-    { name: 'System Invoices', value: summary.invoiceCount, icon: FileText, color: 'text-indigo-500', bg: 'bg-indigo-100 dark:bg-indigo-900/30' },
+    { name: 'Total Revenue', value: formatCurrency(summary.totalRevenue, currency), icon: Banknote, color: 'text-indigo-600', bg: 'bg-indigo-100 dark:bg-indigo-900/30' },
+    { name: 'Total Pending', value: formatCurrency(summary.totalPending, currency), icon: Activity, color: 'text-yellow-600', bg: 'bg-yellow-200/50 dark:bg-yellow-900/30' },
+    { name: 'System Invoices', value: summary.invoiceCount, icon: FileText, color: 'text-gray-700 dark:text-gray-300', bg: 'bg-gray-200 dark:bg-gray-700/50' },
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard Overview</h1>
-        <div className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300">
-          Last 30 Days
-        </div>
+    <div className="space-y-10 px-4 md:px-0">
+      <div className="flex flex-col mb-8 mt-4 whitespace-pre-wrap">
+        <h1 className="text-5xl md:text-6xl font-light text-gray-900 dark:text-white tracking-tight">
+          Welcome in, <span className="font-medium">{user?.name?.split(' ')[0] || 'Admin'}</span>
+        </h1>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {stats.map((stat) => (
-          <div key={stat.name} className="relative bg-white dark:bg-gray-800 pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+          <div key={stat.name} className="relative bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl px-6 py-8 shadow-sm rounded-[32px] border border-white/50 dark:border-white/10 hover:shadow-lg hover:bg-white/50 transition-all duration-300">
             <dt>
-              <div className={clsx("absolute rounded-xl p-3", stat.bg)}>
+              <div className={clsx("absolute top-6 right-6 rounded-full p-4", stat.bg)}>
                 <stat.icon className={clsx("h-6 w-6", stat.color)} aria-hidden="true" />
               </div>
-              <p className="ml-16 text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{stat.name}</p>
+              <p className="text-base font-medium text-gray-500 dark:text-gray-400 mt-2">{stat.name}</p>
             </dt>
-            <dd className="ml-16 pb-6 flex items-baseline sm:pb-7">
-              <p className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">{stat.value}</p>
+            <dd className="mt-4 flex items-baseline">
+              <p className="text-4xl font-semibold text-gray-900 dark:text-white tracking-tight">{stat.value}</p>
             </dd>
-            <div className="absolute bottom-0 inset-x-0 bg-gray-50 dark:bg-gray-800/50 px-4 py-4 sm:px-6">
-              <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500"> View all<span className="sr-only"> {stat.name} stats</span></a>
-              </div>
-            </div>
           </div>
         ))}
       </div>
 
       {/* Charts */}
-      <div className="mt-8 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-        <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-6">Revenue Trajectory</h2>
-        <RevenueChart revenue={revenue} />
+      <div className="mt-8 bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl p-8 rounded-[32px] shadow-sm border border-white/50 dark:border-white/10">
+        <h2 className="text-xl font-medium text-gray-900 dark:text-white mb-8">Revenue Trajectory</h2>
+        <div className="h-80 w-full">
+          <RevenueChart revenue={revenue} />
+        </div>
       </div>
     </div>
   );

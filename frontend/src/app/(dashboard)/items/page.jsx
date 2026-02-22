@@ -97,7 +97,7 @@ export default function ItemsPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+      <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl shadow-sm rounded-[32px] overflow-hidden border border-white/50 dark:border-white/10">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
           <thead className="bg-gray-50 dark:bg-gray-900/50">
             <tr>
@@ -159,7 +159,7 @@ export default function ItemsPage() {
               <div className="absolute inset-0 bg-gray-900 opacity-75"></div>
             </div>
 
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 w-full max-w-lg sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-3xl rounded-[32px] border border-white/50 dark:border-white/10 px-4 pt-5 pb-4 text-left shadow-2xl transform transition-all sm:my-8 w-full max-w-lg sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
               <div className="absolute top-0 right-0 pt-4 pr-4">
                 <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-500 focus:outline-none">
                   <X className="h-6 w-6" />

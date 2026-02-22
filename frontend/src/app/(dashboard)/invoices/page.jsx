@@ -185,7 +185,7 @@ export default function InvoicesPage() {
         </select>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+      <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl shadow-sm rounded-[32px] overflow-hidden border border-white/50 dark:border-white/10">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
           <thead className="bg-gray-50 dark:bg-gray-900/50">
             <tr>
@@ -272,7 +272,7 @@ export default function InvoicesPage() {
               <div className="absolute inset-0 bg-gray-900 opacity-75"></div>
             </div>
 
-            <div className="relative flex flex-col bg-white dark:bg-gray-800 rounded-xl text-left shadow-2xl transform transition-all sm:my-8 w-full max-w-4xl max-h-[90vh] overflow-hidden" role="dialog">
+            <div className="relative flex flex-col bg-white/60 dark:bg-gray-800/60 backdrop-blur-3xl rounded-[32px] border border-white/50 dark:border-white/10 text-left shadow-2xl transform transition-all sm:my-8 w-full max-w-4xl max-h-[90vh]" role="dialog">
               <div className="flex-shrink-0 flex justify-between items-center px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{editingInvoiceId ? 'Edit Invoice' : 'Create Invoice'}</h3>
                 <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-500">

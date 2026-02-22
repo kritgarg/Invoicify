@@ -65,7 +65,7 @@ export default function SettingsPage() {
         <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Manage your business and organization details.</p>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+      <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl shadow-sm rounded-[32px] overflow-hidden border border-white/50 dark:border-white/10 p-8">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">Organization Details</h3>

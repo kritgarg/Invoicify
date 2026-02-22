@@ -1,4 +1,7 @@
+import { Outfit } from 'next/font/google';
 import './globals.css';
+
+const outfit = Outfit({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Invoicify Dashboard',
@@ -8,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="antialiased bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <body className={`${outfit.className} antialiased bg-gradient-to-br from-[#fdfbf6] to-[#f4f2e3] dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 min-h-screen`}>
         {children}
       </body>
     </html>

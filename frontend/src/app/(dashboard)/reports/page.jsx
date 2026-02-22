@@ -61,9 +61,9 @@ export default function ReportsPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Reports &amp; Analytics</h1>
+        <h1 className="text-4xl font-light text-gray-900 dark:text-white tracking-tight">Reports &amp; Analytics</h1>
         
-        <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 p-2 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
+        <div className="flex items-center space-x-2 bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl p-2 border border-white/50 dark:border-white/10 rounded-full shadow-sm">
           <Calendar className="w-5 h-5 text-gray-500 dark:text-gray-400" />
           <select 
             value={range} 
@@ -80,7 +80,7 @@ export default function ReportsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Total Revenue Summary */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+        <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl p-8 rounded-[32px] shadow-sm border border-white/50 dark:border-white/10 hover:shadow-lg hover:bg-white/50 transition-all duration-300">
           <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2 pb-4 border-b border-gray-100 dark:border-gray-700">
             Total Revenue ({range === 'all' ? 'All Time' : `Last ${range.replace('d', ' Days')}`})
           </h2>
@@ -95,7 +95,7 @@ export default function ReportsPage() {
         </div>
 
         {/* Invoice Status Distribution */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+        <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl p-8 rounded-[32px] shadow-sm border border-white/50 dark:border-white/10 hover:shadow-lg hover:bg-white/50 transition-all duration-300">
           <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-6">Invoice Status Distribution</h2>
           <div className="h-64">
             {invoiceStatusData.length > 0 ? (

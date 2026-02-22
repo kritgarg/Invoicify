@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { getSession } from '@/lib/auth';
 import api from '@/lib/api';
-import Sidebar from '@/components/layout/Sidebar';
+import Topbar from '@/components/layout/Topbar';
 import { Loader2, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 
@@ -81,11 +81,11 @@ export default function DashboardLayout({ children }) {
   const hasAccess = requiredRoles.includes(currentRole);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
-      <Sidebar user={user} />
-      <div className="flex flex-col flex-1 w-0 overflow-hidden">
+    <div className="flex flex-col min-h-screen">
+      <Topbar user={user} />
+      <div className="flex flex-col flex-1 w-full overflow-hidden">
         <main className="flex-1 relative overflow-y-auto focus:outline-none">
-          <div className="py-6 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
+          <div className="py-6 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto w-full">
             {hasAccess ? (
               <CurrencyContext.Provider value={user?.organization?.currency || 'USD'}>
                 {children}
@@ -99,7 +99,7 @@ export default function DashboardLayout({ children }) {
                 </p>
                 <Link 
                   href="/customers"
-                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
                 >
                   Go Home
                 </Link>

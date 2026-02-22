@@ -132,7 +132,7 @@ export default function InvoiceDetailPage() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+      <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl shadow-sm rounded-[32px] overflow-hidden border border-white/50 dark:border-white/10 p-8">
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div>
             <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Bill To</h3>
@@ -190,7 +190,7 @@ export default function InvoiceDetailPage() {
         </table>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+      <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-2xl shadow-sm rounded-[32px] overflow-hidden border border-white/50 dark:border-white/10">
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
           <h3 className="text-lg font-medium text-gray-900 dark:text-white">Payment History</h3>
           <button 
@@ -227,7 +227,7 @@ export default function InvoiceDetailPage() {
               <div className="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
             </div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="inline-block align-bottom bg-white/60 dark:bg-gray-800/60 backdrop-blur-3xl rounded-[32px] border border-white/50 dark:border-white/10 text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <form onSubmit={handleSubmit(onAddPayment)}>
                 <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-4">Record Payment</h3>
