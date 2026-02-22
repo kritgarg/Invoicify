@@ -18,7 +18,7 @@ app.set("trust proxy", true);
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow all origins
+    // Allow all origins for dynamic deployment support
     callback(null, true);
   },
   credentials: true
@@ -39,12 +39,10 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Better Auth Native Endpoints Handled By Built-in Handlers
-// This supports email&password login, session mgmt, cookies, password hashing automatically
+// Better Auth Native Endpoints
 app.all("/api/auth/*", toNodeHandler(auth));
 
 // Protected Custom Application Routes
-// Incorporates endpoints for /me, /users, and /users/:id/deactivate
 app.use("/api/users", usersRoutes);
 
 // General health check
@@ -63,22 +61,11 @@ app.get("/api/debug-env", (req, res) => {
   });
 });
 
-// Debug endpoint to check env (temporary)
-app.get("/api/debug-env", (req, res) => {
-  res.status(200).json({
-    NODE_ENV: process.env.NODE_ENV,
-    BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
-    HAS_SECRET: !!process.env.BETTER_AUTH_SECRET,
-    FRONTEND_URL: process.env.FRONTEND_URL,
-    PORT: process.env.PORT
-  });
-});
-
 // Module Routes
 app.use("/api/customers", customerRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/invoices", invoiceRoutes);
-app.use("/api", paymentRoutes); // Mounted at /api because payment routes include /invoices/:id/payments
+app.use("/api", paymentRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
 // Generic Error Handler
