@@ -9,7 +9,6 @@ import usersRoutes from "./modules/users/routes.js";
 import customerRoutes from "./modules/customers/routes.js";
 import itemRoutes from "./modules/items/routes.js";
 import invoiceRoutes from "./modules/invoices/routes.js";
-import paymentRoutes from "./modules/payments/routes.js";
 import dashboardRoutes from "./modules/dashboard/routes.js";
 
 const app = express();
@@ -47,7 +46,6 @@ app.use("/api/users", usersRoutes);
 app.use("/api/customers", customerRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/invoices", invoiceRoutes);
-app.use("/api", paymentRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
 // General health check
