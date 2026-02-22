@@ -43,12 +43,8 @@ export default function LoginPage() {
         email: data.email,
         password: data.password,
       });
-      // The Better Auth sign-in response returns a user object inside data.user 
-      if (res.data?.user?.role === 'admin') {
-        router.push('/dashboard');
-      } else {
-        router.push('/customers');
-      }
+      // Use window.location.href for a full reload to ensure cookies are properly set across domains
+      window.location.href = res.data?.user?.role === 'admin' ? '/dashboard' : '/customers';
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to login');
       setIsLoading(false);
