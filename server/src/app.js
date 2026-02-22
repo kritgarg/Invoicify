@@ -24,6 +24,18 @@ app.use(cors({
   credentials: true
 }));
 
+// Debug: Intercept and log Set-Cookie headers
+app.use((req, res, next) => {
+  const originalSetHeader = res.setHeader;
+  res.setHeader = function (name, value) {
+    if (name.toLowerCase() === 'set-cookie') {
+      console.log(`[Cookie Debug] Setting Cookie for ${req.url}:`, value);
+    }
+    return originalSetHeader.apply(this, arguments);
+  };
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
