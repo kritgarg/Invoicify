@@ -22,7 +22,7 @@ export default function InvoicePreviewModal({ invoiceId, onClose }) {
         setLoading(true);
         const [invRes, orgRes] = await Promise.all([
           api.get(`/invoices/${invoiceId}`),
-          api.get('/users/me')
+          api.get('/auth/me')
         ]);
         setInvoice(invRes.data);
         if (orgRes.data?.user?.organization?.name) {

@@ -26,11 +26,10 @@ export default function InvoiceDetailPage() {
       setLoading(true);
       const [invRes, orgRes] = await Promise.all([
         api.get(`/invoices/${params.id}`),
-        api.get('/users/me')
+        api.get('/auth/me')
       ]);
       setInvoice(invRes.data);
-      if (orgRes.data?.organizationId) {
-        // Technically we need the org details, setting placeholder for now unless there's an endpoint
+      if (orgRes.data?.user?.organizationId) {
         setOrganization({ name: orgRes.data.user?.organization?.name || 'Your Company' });
       }
     } catch (err) {

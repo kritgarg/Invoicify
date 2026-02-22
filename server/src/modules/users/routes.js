@@ -1,41 +1,15 @@
 import express from "express";
-import { createUser, deactivateUser, activateUser, getCurrentUser, getUsers, updateOrganization } from "./controller.js";
-import { requireAuth } from "../../middlewares/auth.middleware.js";
-import { requirePermission } from "../../middlewares/rbac.middleware.js";
+import * as userController from "./controller.js";
+import { authenticate, requireRole } from "../../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-// Apply global requireAuth middleware for all routes in this file
-router.use(requireAuth);
+router.use(authenticate);
 
-// GET /users - Admin only
-router.get("/", requirePermission("user:view"), getUsers);
-
-// GET /me
-router.get("/me", getCurrentUser);
-
-// PATCH /organization - Admin only
-router.patch("/organization", updateOrganization);
-
-// POST /users - Admin only
-router.post(
-  "/",
-  requirePermission("user:create"),
-  createUser
-);
-
-// PATCH /users/:id/deactivate - Admin only
-router.patch(
-  "/:id/deactivate",
-  requirePermission("user:deactivate"),
-  deactivateUser
-);
-
-// PATCH /users/:id/activate - Admin only
-router.patch(
-  "/:id/activate",
-  requirePermission("user:activate"),
-  activateUser
-);
+router.get("/", userController.getUsers);
+router.post("/", requireRole(["admin"]), userController.createUser);
+router.patch("/organization", requireRole(["admin"]), userController.updateOrganization);
+router.patch("/:id/deactivate", requireRole(["admin"]), userController.deactivateUser);
+router.patch("/:id/activate", requireRole(["admin"]), userController.activateUser);
 
 export default router;

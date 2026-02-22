@@ -1,11 +1,11 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { toNodeHandler } from "better-auth/node";
-import { auth } from "./auth/auth.js";
-import usersRoutes from "./modules/users/routes.js";
+import cookieParser from "cookie-parser";
 
-// Import custom modules
+// Import modules
+import authRoutes from "./modules/auth/routes.js";
+import usersRoutes from "./modules/users/routes.js";
 import customerRoutes from "./modules/customers/routes.js";
 import itemRoutes from "./modules/items/routes.js";
 import invoiceRoutes from "./modules/invoices/routes.js";
@@ -18,60 +18,47 @@ app.set("trust proxy", true);
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow all origins for dynamic deployment support
-    callback(null, true);
+    // Dynamic origin allowance based on FRONTEND_URL or allow all for development
+    if (process.env.NODE_ENV === 'production') {
+      const allowedOrigins = [process.env.FRONTEND_URL];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    } else {
+      callback(null, true);
+    }
   },
   credentials: true
 }));
 
-// Debug: Intercept and log Set-Cookie headers
-app.use((req, res, next) => {
-  const originalSetHeader = res.setHeader;
-  res.setHeader = function (name, value) {
-    if (name.toLowerCase() === 'set-cookie') {
-      console.log(`[Cookie Debug] Setting Cookie for ${req.url}:`, value);
-    }
-    return originalSetHeader.apply(this, arguments);
-  };
-  next();
-});
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Better Auth Native Endpoints
-app.all("/api/auth/*", toNodeHandler(auth));
+// Auth Routes
+app.use("/api/auth", authRoutes);
 
-// Protected Custom Application Routes
+// User Routes
 app.use("/api/users", usersRoutes);
 
-// General health check
-app.get("/api/health", (req, res) => {
-  res.status(200).json({ status: "OK", timestamp: new Date() });
-});
-
-// Debug endpoint to check env (temporary)
-app.get("/api/debug-env", (req, res) => {
-  res.status(200).json({
-    NODE_ENV: process.env.NODE_ENV,
-    BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
-    HAS_SECRET: !!process.env.BETTER_AUTH_SECRET,
-    FRONTEND_URL: process.env.FRONTEND_URL,
-    PORT: process.env.PORT
-  });
-});
-
-// Module Routes
+// Business Module Routes
 app.use("/api/customers", customerRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/invoices", invoiceRoutes);
 app.use("/api", paymentRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
+// General health check
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "OK", timestamp: new Date() });
+});
+
 // Generic Error Handler
 app.use((err, req, res, next) => {
-  console.error("Unhandled Express Error:", err);
-  res.status(500).json({ error: "Internal Server Error" });
+  console.error("Unhandled Error:", err);
+  res.status(err.status || 500).json({ error: err.message || "Internal Server Error" });
 });
 
 const PORT = process.env.PORT || 8080;

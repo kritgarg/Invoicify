@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }) {
 
   const handleSignOut = async () => {
     try {
-      await api.post('/auth/sign-out');
+      await api.post('/auth/logout');
     } catch (e) {
       console.error(e);
     }

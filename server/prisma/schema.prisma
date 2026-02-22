@@ -7,115 +7,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id             String        @id @default(cuid())
-  email          String        @unique
-  name           String?
-  role           String        @default("staff") // "admin" or "staff"
-  isActive       Boolean       @default(true)
-  organizationId String?
-  organization   Organization? @relation(fields: [organizationId], references: [id])
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-
-  // Better Auth Core Fields
-  emailVerified  Boolean       @default(false)
-  image          String?
-  sessions       Session[]
-  accounts       Account[]
-  
-  // Required by Better Auth Admin Plugin
-  banned         Boolean?      @default(false)
-  banReason      String?
-  banExpires     DateTime?
-  
-  assignedCustomers Customer[]
+enum Role {
+  admin
+  staff
 }
 
 model Organization {
-  id                String             @id @default(cuid())
-  name              String
-  slug              String?            @unique
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  users             User[]
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   
-  // Required by Better Auth Organization Plugin
-  members           Member[]
-  invitations       Invitation[]
-  
-  // Business relations
-  customers         Customer[]
-  items             Item[]
-  invoices          Invoice[]
-  invoiceItems      InvoiceItem[]
-  payments          Payment[]
+  users     User[]
+  customers Customer[]
+  items     Item[]
+  invoices  Invoice[]
+  invoiceItems InvoiceItem[]
+  payments  Payment[]
 }
 
-// Required by Better Auth Organization Plugin
-model Member {
+model User {
   id             String       @id @default(cuid())
+  email          String       @unique
+  password       String
+  name           String?
+  role           Role         @default(staff)
+  isActive       Boolean      @default(true)
   organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  userId         String
-  role           String       @default("member")
+  organization   Organization @relation(fields: [organizationId], references: [id])
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
-}
 
-// Required by Better Auth Organization Plugin
-model Invitation {
-  id             String       @id @default(cuid())
-  organizationId String
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  email          String
-  role           String?
-  status         String       @default("pending")
-  expiresAt      DateTime
-  inviterId      String
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-}
-
-model Session {
-  id                   String   @id @default(cuid())
-  expiresAt            DateTime
-  token                String
-  createdAt            DateTime
-  updatedAt            DateTime
-  ipAddress            String?
-  userAgent            String?
-  userId               String
-  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  activeOrganizationId String?
-
-  @@unique([token])
-}
-
-model Account {
-  id                    String    @id @default(cuid())
-  accountId             String
-  providerId            String
-  userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
-}
-
-model Verification {
-  id         String   @id @default(cuid())
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  assignedCustomers Customer[]
 }
 
 model Customer {

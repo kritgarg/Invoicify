@@ -14,7 +14,7 @@ export default function SettingsPage() {
   const fetchSessionData = async () => {
     try {
       setLoading(true);
-      const { data } = await api.get('/users/me');
+      const { data } = await api.get('/auth/me');
       if (data.user?.role !== 'admin') {
         window.location.href = '/dashboard'; // Redirect non-admins
       }

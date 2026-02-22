@@ -31,7 +31,7 @@ export default function Sidebar({ user }) {
 
   const handleLogout = async () => {
     try {
-      await api.post('/auth/sign-out', {});
+      await api.post('/auth/logout', {});
       window.location.href = '/login';
     } catch (e) {
       console.error(e);

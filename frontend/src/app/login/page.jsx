@@ -39,11 +39,11 @@ export default function LoginPage() {
     setIsLoading(true);
     setError('');
     try {
-      const res = await api.post('/auth/sign-in/email', {
+      const res = await api.post('/auth/login', {
         email: data.email,
         password: data.password,
       });
-      // Use window.location.href for a full reload to ensure cookies are properly set across domains
+      // Use window.location.href for a full reload to ensure cookies are properly set
       window.location.href = res.data?.user?.role === 'admin' ? '/dashboard' : '/customers';
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to login');

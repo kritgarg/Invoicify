@@ -1,9 +1,7 @@
 import { z } from "zod";
+import bcrypt from "bcryptjs";
 import { prisma } from "../../config/db.js";
-import { auth } from "../../auth/auth.js";
-import { hashPassword } from "better-auth/crypto";
 
-// Validation schema for creating a user
 const createUserSchema = z.object({
   email: z.string().email(),
   name: z.string().min(2),
@@ -13,12 +11,12 @@ const createUserSchema = z.object({
 // POST /users
 export const createUser = async (req, res) => {
   try {
-    const validationDate = createUserSchema.safeParse(req.body);
-    if (!validationDate.success) {
-      return res.status(400).json({ error: validationDate.error.errors });
+    const validation = createUserSchema.safeParse(req.body);
+    if (!validation.success) {
+      return res.status(400).json({ error: validation.error.errors });
     }
     
-    const { email, name, password } = validationDate.data;
+    const { email, name, password } = validation.data;
 
     const existingUser = await prisma.user.findUnique({
       where: { email }
@@ -28,26 +26,15 @@ export const createUser = async (req, res) => {
       return res.status(400).json({ error: "Email already in use" });
     }
 
-    const hashedPassword = await hashPassword(password);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create the staff user natively using Prisma
     const completeUser = await prisma.user.create({
       data: {
         email,
         name,
+        password: hashedPassword,
         role: "staff",
         organizationId: req.user.organizationId,
-        emailVerified: true,
-      }
-    });
-
-    // Create the Better Auth account record with hashed password
-    await prisma.account.create({
-      data: {
-        accountId: email,
-        providerId: "credential",
-        userId: completeUser.id,
-        password: hashedPassword,
       }
     });
 
@@ -72,9 +59,8 @@ export const deactivateUser = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Optional: prevent self-deactivation 
-    if (id === req.user.id) {
-       return res.status(400).json({ error: "Cannot deactivate your own admin account" });
+    if (id === req.user.userId) {
+       return res.status(400).json({ error: "Cannot deactivate your own account" });
     }
 
     const targetUser = await prisma.user.findUnique({
@@ -85,16 +71,13 @@ export const deactivateUser = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Ensure they belong to the same organization
     if (targetUser.organizationId !== req.user.organizationId) {
        return res.status(403).json({ error: "Forbidden: User in different organization" });
     }
 
     const deactivatedUser = await prisma.user.update({
       where: { id },
-      data: {
-        isActive: false
-      }
+      data: { isActive: false }
     });
 
     res.status(200).json({
@@ -120,16 +103,13 @@ export const activateUser = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Ensure they belong to the same organization
     if (targetUser.organizationId !== req.user.organizationId) {
        return res.status(403).json({ error: "Forbidden: User in different organization" });
     }
 
     const activatedUser = await prisma.user.update({
       where: { id },
-      data: {
-        isActive: true
-      }
+      data: { isActive: true }
     });
 
     res.status(200).json({
@@ -145,10 +125,6 @@ export const activateUser = async (req, res) => {
 // GET /users
 export const getUsers = async (req, res) => {
   try {
-    if (!req.user.organizationId) {
-      return res.status(200).json({ users: [] });
-    }
-
     const users = await prisma.user.findMany({
       where: { organizationId: req.user.organizationId },
       select: {
@@ -169,33 +145,11 @@ export const getUsers = async (req, res) => {
   }
 };
 
-// GET /me
-export const getCurrentUser = async (req, res) => {
-  try {
-    // req.user is attached by the requireAuth middleware
-    if (!req.user) {
-      return res.status(404).json({ error: "Session missing user" });
-    }
-
-    // Exclude password and sensitive info if any were attached
-    const { password, ...safeUser } = req.user;
-    
-    res.status(200).json({ user: safeUser });
-  } catch (error) {
-    console.error("Get Current User Error:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-
 // PATCH /users/organization
 export const updateOrganization = async (req, res) => {
   try {
     const { name } = req.body;
     if (!name) return res.status(400).json({ error: "Name is required" });
-
-    if (req.user.role !== "admin") {
-      return res.status(403).json({ error: "Only admins can update organization details" });
-    }
 
     const updatedOrg = await prisma.organization.update({
       where: { id: req.user.organizationId },
