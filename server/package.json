@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
+    "vercel-build": "prisma generate",
     "db:migrate": "npx prisma migrate dev --name init",
     "db:push": "npx prisma db push",
     "db:studio": "npx prisma studio"
