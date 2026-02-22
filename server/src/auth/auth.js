@@ -44,5 +44,11 @@ export const auth = betterAuth({
   },
   logger: {
     level: "debug"
+  },
+  advanced: {
+    cookieOptions: {
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      secure: process.env.NODE_ENV === "production" ? true : false,
+    }
   }
 });
