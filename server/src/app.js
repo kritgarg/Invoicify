@@ -40,6 +40,28 @@ app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "OK", timestamp: new Date() });
 });
 
+// Debug endpoint to check env (temporary)
+app.get("/api/debug-env", (req, res) => {
+  res.status(200).json({
+    NODE_ENV: process.env.NODE_ENV,
+    BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+    HAS_SECRET: !!process.env.BETTER_AUTH_SECRET,
+    FRONTEND_URL: process.env.FRONTEND_URL,
+    PORT: process.env.PORT
+  });
+});
+
+// Debug endpoint to check env (temporary)
+app.get("/api/debug-env", (req, res) => {
+  res.status(200).json({
+    NODE_ENV: process.env.NODE_ENV,
+    BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+    HAS_SECRET: !!process.env.BETTER_AUTH_SECRET,
+    FRONTEND_URL: process.env.FRONTEND_URL,
+    PORT: process.env.PORT
+  });
+});
+
 // Module Routes
 app.use("/api/customers", customerRoutes);
 app.use("/api/items", itemRoutes);
