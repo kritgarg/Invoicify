@@ -1,4 +1,4 @@
-# Invoicify
+# Invoicify - SaaS Invoicing App
 
 Invoicify is a modern, full-stack Software-as-a-Service (SaaS) invoicing application. It enables businesses to manage customers, track inventory items, generate professional PDF invoices, and monitor their financial health through an intuitive dashboard.
 
@@ -87,8 +87,8 @@ npm install
 
 Create a `.env.local` file in the `frontend` directory:
 ```env
-# Next.js will proxy requests to the backend to avoid CORS/Cookie issues
-NEXT_PUBLIC_API_URL="/api"
+
+NEXT_PUBLIC_API_URL="http://localhost:8080/api"
 ```
 
 Start the frontend development server:

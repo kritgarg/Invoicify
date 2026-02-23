@@ -42,7 +42,7 @@ export default function InvoicesPage() {
   const watchItems = watch('items');
   const watchTaxRate = watch('taxRate');
 
-  // Computed Totals
+  
   const subtotal = watchItems.reduce((acc, item) => acc + (parseFloat(item.quantity) * parseFloat(item.price || 0)), 0);
   const tax = subtotal * (parseFloat(watchTaxRate || 0) / 100);
   const total = subtotal + tax;
@@ -264,7 +264,7 @@ export default function InvoicesPage() {
         </table>
       </div>
 
-      {/* Full Screen Modal */}
+      {}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen p-4 sm:p-0">
@@ -313,7 +313,7 @@ export default function InvoicesPage() {
                     </div>
                   </div>
 
-                  {/* Line Items */}
+                  {}
                   <div className="mt-8">
                     <h4 className="text-sm font-medium text-gray-900 mb-2">Line Items</h4>
                     <div className="space-y-3">
@@ -389,7 +389,7 @@ export default function InvoicesPage() {
           </div>
         </div>
       )}
-      {/* Preview Modal */}
+      {}
       {previewInvoiceId && (
         <InvoicePreviewModal 
           invoiceId={previewInvoiceId} 

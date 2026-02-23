@@ -3,7 +3,6 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-// Import modules
 import authRoutes from "./modules/auth/routes.js";
 import usersRoutes from "./modules/users/routes.js";
 import customerRoutes from "./modules/customers/routes.js";
@@ -18,7 +17,7 @@ app.set("trust proxy", true);
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Dynamic origin allowance based on FRONTEND_URL or allow all for development
+
     if (process.env.NODE_ENV === 'production') {
       const allowedOrigins = [process.env.FRONTEND_URL];
       if (!origin || allowedOrigins.includes(origin)) {
@@ -37,25 +36,20 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Auth Routes
 app.use("/api/auth", authRoutes);
 
-// User Routes
 app.use("/api/users", usersRoutes);
 
-// Business Module Routes
 app.use("/api/customers", customerRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/invoices", invoiceRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/quotes", quoteRoutes);
 
-// General health check
 app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "OK", timestamp: new Date() });
 });
 
-// Generic Error Handler
 app.use((err, req, res, next) => {
   console.error("Unhandled Error:", err);
   res.status(err.status || 500).json({ error: err.message || "Internal Server Error" });

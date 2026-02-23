@@ -10,8 +10,6 @@ import Link from 'next/link';
 
 import { CurrencyContext } from '@/context/CurrencyContext';
 
-// Define route access permissions
-// If a route prefix isn't in this list, it defaults to allowing both admin and staff.
 const ROUTE_PERMISSIONS = {
   '/dashboard': ['admin'],
   '/reports': ['admin'],
@@ -72,7 +70,7 @@ export default function DashboardLayout({ children }) {
     );
   }
 
-  // Check if current user role has access to the current route
+  
   const currentRole = user?.role || 'staff';
   const matchedRoute = Object.keys(ROUTE_PERMISSIONS).find(
     route => pathname === route || pathname.startsWith(route + '/')

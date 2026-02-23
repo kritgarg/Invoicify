@@ -8,7 +8,7 @@ const generateQuoteNumber = async (organizationId) => {
 };
 
 export const createQuote = async (organizationId, userId, data) => {
-  // Recalculate totals server-side
+  
   let calculatedSubtotal = 0;
   let calculatedTax = 0;
   
@@ -67,10 +67,10 @@ export const getQuotes = async (organizationId, queries, userId, userRole) => {
   if (status) where.status = status;
   if (customerId) where.customerId = customerId;
   
-  // If staff, can they only see their own?
-  // "Staff can only see quotes from their organization" -> Already implied by where.organizationId.
-  // The business rule says: 
-  // - "Staff can only see quotes from their organization" - Organization filter covers this.
+  
+  
+  
+  
 
   const [quotes, total] = await Promise.all([
     prisma.quote.findMany({
@@ -113,14 +113,14 @@ export const updateQuote = async (organizationId, quoteId, userId, userRole, dat
 
   if (!existingQuote) throw new Error("Quote not found");
   
-  // "Staff can only edit quotes they created"
+  
   if (userRole !== "admin" && existingQuote.createdById !== userId) {
     throw new Error("Forbidden: You can only edit quotes you created");
   }
 
-  // Handle updates in transaction to ensure consistency
-  // Note: Only updating status and dates for simplicity, or full recalculation if items change.
-  // Full update for quotes allows modifying items too.
+  
+  
+  
   return await prisma.$transaction(async (tx) => {
     let updateData = { ...data, items: undefined };
 
@@ -147,7 +147,7 @@ export const updateQuote = async (organizationId, quoteId, userId, userRole, dat
       updateData.tax = calculatedTax;
       updateData.total = calculatedSubtotal + calculatedTax;
 
-      // Delete old items and insert new ones
+      
       await tx.quoteItem.deleteMany({
         where: { quoteId }
       });

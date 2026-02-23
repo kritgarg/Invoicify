@@ -15,7 +15,7 @@ export const register = async (req, res) => {
             httpOnly: true,
             secure: isProd,
             sameSite: isProd ? 'none' : 'lax',
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            maxAge: 7 * 24 * 60 * 60 * 1000, 
         });
 
         res.status(201).json({ user, token });
@@ -34,7 +34,7 @@ export const login = async (req, res) => {
             httpOnly: true,
             secure: isProd,
             sameSite: isProd ? 'none' : 'lax',
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            maxAge: 7 * 24 * 60 * 60 * 1000, 
         });
 
         res.status(200).json({ user, token });

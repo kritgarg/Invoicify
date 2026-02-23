@@ -17,7 +17,7 @@ export default function UsersManagementPage() {
   const fetchUsers = async () => {
     try {
       const { data } = await api.get('/users');
-      setUsers(data.users || []); // Assuming standard array payload, checking endpoint design
+      setUsers(data.users || []); 
     } catch (error) {
       console.error(error);
     } finally {
@@ -73,7 +73,7 @@ export default function UsersManagementPage() {
         </button>
       </div>
 
-      {/* Table */}
+      {}
       <div className="bg-white/70 backdrop-blur-3xl shadow-sm rounded-[32px] overflow-hidden border border-gray-900/10">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -137,7 +137,7 @@ export default function UsersManagementPage() {
         </table>
       </div>
 
-      {/* Modal */}
+      {}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen p-4 sm:p-0">

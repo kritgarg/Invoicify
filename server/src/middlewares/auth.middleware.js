@@ -13,7 +13,7 @@ export const authenticate = async (req, res, next) => {
         return res.status(401).json({ error: 'Unauthorized: Invalid token' });
     }
 
-    // Verify user is still active in DB
+    
     const user = await prisma.user.findUnique({
         where: { id: decoded.userId },
         select: { isActive: true }

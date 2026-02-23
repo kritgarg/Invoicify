@@ -3,7 +3,7 @@ import { prisma } from "../../config/db.js";
 export const createInvoice = async (organizationId, data) => {
   const { customerId, items, issueDate, dueDate, taxRate } = data;
   
-  // Calculations
+  
   const subtotal = items.reduce((acc, item) => acc + (item.quantity * item.price), 0);
   const tax = subtotal * (taxRate / 100);
   const total = subtotal + tax;
@@ -11,7 +11,7 @@ export const createInvoice = async (organizationId, data) => {
   const invoiceIssueDate = issueDate ? new Date(issueDate) : new Date();
   const invoiceDueDate = dueDate ? new Date(dueDate) : new Date(new Date().setDate(new Date().getDate() + 30));
 
-  // Transaction
+  
   return await prisma.$transaction(async (tx) => {
     const invoice = await tx.invoice.create({
       data: {

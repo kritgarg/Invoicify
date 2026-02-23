@@ -43,7 +43,7 @@ export default function Topbar({ user }) {
       </div>
       
       <div className="flex-1 flex justify-end items-center gap-4">
-        {/* Nav Links Pill */}
+        {}
         <nav className="hidden md:flex items-center bg-transparent gap-2 mr-4">
           {INVOICE_ROUTES.map((route) => {
                if (!route.roles.includes(userRole)) return null;
@@ -66,7 +66,7 @@ export default function Topbar({ user }) {
           })}
         </nav>
 
-        {/* Action Icons */}
+        {}
         <div className="flex items-center gap-3">
           <button onClick={handleLogout} className="p-3 bg-white/70 backdrop-blur-3xl rounded-full shadow-sm hover:bg-red-100 hover:text-red-600 transition border border-gray-900/10">
             <LogOut className="w-5 h-5 text-gray-800 hover:text-red-600" />

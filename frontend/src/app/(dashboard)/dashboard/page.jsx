@@ -71,7 +71,7 @@ export default function Dashboard() {
         </h1>
       </div>
 
-      {/* KPI Cards */}
+      {}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {stats.map((stat) => (
           <div key={stat.name} className="relative bg-white/70 backdrop-blur-3xl px-6 py-8 shadow-sm rounded-[32px] border border-gray-900/10 hover:shadow-lg hover:bg-white/90 transition-all duration-300">
@@ -88,7 +88,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Charts */}
+      {}
       <div className="mt-8 bg-white/70 backdrop-blur-3xl p-8 rounded-[32px] shadow-sm border border-gray-900/10">
         <h2 className="text-xl font-medium text-[#1c1c1c] mb-8">Revenue Trajectory</h2>
         <div className="h-80 w-full">

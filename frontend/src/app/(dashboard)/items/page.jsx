@@ -35,7 +35,7 @@ export default function ItemsPage() {
   }, [search]);
 
   const onSubmit = async (data) => {
-    // Convert price string back to a number since it goes through an input
+    
     const payload = { ...data, price: parseFloat(data.price) };
     try {
       if (editingId) {
@@ -82,7 +82,7 @@ export default function ItemsPage() {
         </button>
       </div>
 
-      {/* Search */}
+      {}
       <div className="max-w-md relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <Search className="h-5 w-5 text-gray-400" />
@@ -96,7 +96,7 @@ export default function ItemsPage() {
         />
       </div>
 
-      {/* Table */}
+      {}
       <div className="bg-white/70 backdrop-blur-3xl shadow-sm rounded-[32px] overflow-hidden border border-gray-900/10">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -151,7 +151,7 @@ export default function ItemsPage() {
         </table>
       </div>
 
-      {/* Modal */}
+      {}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen p-4 sm:p-0">

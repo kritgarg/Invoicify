@@ -35,7 +35,7 @@ export const getRevenue = async (organizationId, range) => {
   if (range === "7d") startDate.setDate(startDate.getDate() - 7);
   else if (range === "30d") startDate.setDate(startDate.getDate() - 30);
   else if (range === "90d") startDate.setDate(startDate.getDate() - 90);
-  else startDate = new Date(0); // all
+  else startDate = new Date(0); 
 
   const invoices = await prisma.invoice.findMany({
     where: {
@@ -50,7 +50,7 @@ export const getRevenue = async (organizationId, range) => {
     orderBy: { issueDate: "asc" }
   });
 
-  // Group by date (YYYY-MM-DD)
+  
   const groupedData = invoices.reduce((acc, invoice) => {
     const date = invoice.issueDate.toISOString().split("T")[0];
     if (!acc[date]) acc[date] = 0;

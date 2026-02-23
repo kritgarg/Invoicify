@@ -36,7 +36,7 @@ export default function Sidebar({ user }) {
       window.location.href = '/login';
     } catch (e) {
       console.error(e);
-      window.location.href = '/login'; // Force anyway
+      window.location.href = '/login'; 
     }
   };
 

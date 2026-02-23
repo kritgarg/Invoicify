@@ -74,8 +74,6 @@ export default function QuoteDetailPage({ params }) {
     }
   };
 
-
-
   if (loading) {
     return (
       <div className="flex h-[60vh] items-center justify-center">
@@ -89,7 +87,7 @@ export default function QuoteDetailPage({ params }) {
   return (
     <div className="max-w-5xl mx-auto space-y-6 relative">
       
-      {/* Toast */}
+      {}
       {toastMessage && (
         <div className="fixed top-8 right-8 z-50 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl flex items-center gap-3 animate-fade-in-down">
           <CheckCircle2 className="h-5 w-5 text-green-400" />
@@ -97,7 +95,7 @@ export default function QuoteDetailPage({ params }) {
         </div>
       )}
 
-      {/* Header */}
+      {}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-4">
           <Link href="/quotes" className="p-2 bg-white/70 backdrop-blur-3xl rounded-full shadow-sm border border-gray-900/10 hover:bg-white text-gray-500 hover:text-gray-900 transition flex-shrink-0">
@@ -145,10 +143,10 @@ export default function QuoteDetailPage({ params }) {
         </div>
       </div>
 
-      {/* Content */}
+      {}
       <div className="bg-white/70 backdrop-blur-3xl shadow-sm rounded-[32px] border border-gray-900/10 p-8">
         
-        {/* Info Grid */}
+        {}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 border-b border-gray-100 pb-8">
           <div>
             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Prepared For</h3>
@@ -172,7 +170,7 @@ export default function QuoteDetailPage({ params }) {
           </div>
         </div>
 
-        {/* Items Table */}
+        {}
         <div className="mb-8 overflow-hidden rounded-xl border border-gray-200">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -196,7 +194,7 @@ export default function QuoteDetailPage({ params }) {
           </table>
         </div>
 
-        {/* Totals */}
+        {}
         <div className="flex justify-end pr-6">
           <div className="w-72 space-y-3">
             <div className="flex justify-between text-gray-600 text-sm">

@@ -40,7 +40,7 @@ export default function EditQuotePage({ params }) {
   const watchItems = watch('items');
   const watchTaxRate = watch('taxRate');
 
-  // Computed Totals
+  
   const subtotal = watchItems.reduce((acc, item) => acc + (parseFloat(item.quantity || 1) * parseFloat(item.rate || 0)), 0);
   const tax = subtotal * (parseFloat(watchTaxRate || 0) / 100);
   const total = subtotal + tax;
@@ -59,7 +59,7 @@ export default function EditQuotePage({ params }) {
         
         const quote = quoteRes.data;
         
-        // Calculate an approximate tax rate from the total tax and subtotal
+        
         let taxRt = 0;
         if (quote.tax > 0 && quote.subtotal > 0) {
           taxRt = (quote.tax / quote.subtotal) * 100;
@@ -180,7 +180,7 @@ export default function EditQuotePage({ params }) {
             </div>
           </div>
 
-          {/* Line Items */}
+          {}
           <div className="mt-8">
             <h4 className="text-base font-medium text-gray-900 mb-4 border-b pb-2">Line Items</h4>
             <div className="space-y-3">

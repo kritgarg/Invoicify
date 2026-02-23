@@ -16,7 +16,7 @@ export default function SettingsPage() {
       setLoading(true);
       const { data } = await api.get('/auth/me');
       if (data.user?.role !== 'admin') {
-        window.location.href = '/dashboard'; // Redirect non-admins
+        window.location.href = '/dashboard'; 
       }
       if (data.user?.organization) {
         setValue('organizationName', data.user.organization.name);

@@ -8,7 +8,6 @@ const createUserSchema = z.object({
   password: z.string().min(8)
 });
 
-// POST /users
 export const createUser = async (req, res) => {
   try {
     const validation = createUserSchema.safeParse(req.body);
@@ -54,7 +53,6 @@ export const createUser = async (req, res) => {
   }
 };
 
-// PATCH /users/:id/deactivate
 export const deactivateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -90,7 +88,6 @@ export const deactivateUser = async (req, res) => {
   }
 };
 
-// PATCH /users/:id/activate
 export const activateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -122,7 +119,6 @@ export const activateUser = async (req, res) => {
   }
 };
 
-// GET /users
 export const getUsers = async (req, res) => {
   try {
     const users = await prisma.user.findMany({
@@ -145,7 +141,6 @@ export const getUsers = async (req, res) => {
   }
 };
 
-// PATCH /users/organization
 export const updateOrganization = async (req, res) => {
   try {
     const { name, currency } = req.body;

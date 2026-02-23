@@ -29,7 +29,7 @@ const QuotePDF = ({ quote, organization }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       
-      {/* Header */}
+      {}
       <View style={styles.header}>
         <View>
           <Text style={styles.companyName}>{organization?.name || 'Company Name'}</Text>
@@ -40,7 +40,7 @@ const QuotePDF = ({ quote, organization }) => (
         </View>
       </View>
 
-      {/* Details */}
+      {}
       <View style={styles.detailsSection}>
         <View>
           <Text style={styles.sectionTitle}>PREPARED FOR:</Text>
@@ -60,7 +60,7 @@ const QuotePDF = ({ quote, organization }) => (
         </View>
       </View>
 
-      {/* Table Item Header */}
+      {}
       <View style={styles.table}>
         <View style={styles.tableHeader}>
           <Text style={[styles.colDesc, styles.colTextHead]}>Description</Text>
@@ -79,7 +79,7 @@ const QuotePDF = ({ quote, organization }) => (
         ))}
       </View>
 
-      {/* Totals */}
+      {}
       <View style={styles.totalsSection}>
         <View style={styles.totalRow}>
           <Text style={styles.totalText}>Subtotal:</Text>
@@ -97,7 +97,7 @@ const QuotePDF = ({ quote, organization }) => (
         </View>
       </View>
 
-      {/* Footer */}
+      {}
       <View style={styles.footer}>
         <Text>Thank you for considering our proposal. We look forward to doing business with you.</Text>
       </View>

@@ -36,15 +36,14 @@ export default function RegisterPage() {
     setIsLoading(true);
     setError('');
     try {
-      // Create Organization + Admin User via backend
       await api.post('/auth/register', {
         name: data.name,
         email: data.email,
         password: data.password,
         organizationName: `${data.name}'s Corp`
       });
-      // Optionally create an organization immediately for them:
-      // await api.post('/auth/organization/create', { name: `${data.name}'s Org`, slug: data.name.toLowerCase().replace(/[^a-z0-9]/g, '-') });
+      
+      
       
       window.location.href = '/dashboard';
     } catch (err) {

@@ -3,16 +3,16 @@ import { prisma } from '../../config/db.js';
 import { generateToken } from '../../utils/jwt.js';
 
 export const registerOrganization = async ({ name, email, password, organizationName }) => {
-    // Check if user already exists
+    
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
         throw new Error('User already exists');
     }
 
-    // Hash password
+    
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create organization and user
+    
     const user = await prisma.$transaction(async (tx) => {
         const organization = await tx.organization.create({
             data: {

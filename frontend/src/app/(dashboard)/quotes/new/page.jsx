@@ -37,7 +37,7 @@ export default function NewQuotePage() {
   const watchItems = watch('items');
   const watchTaxRate = watch('taxRate');
 
-  // Computed Totals
+  
   const subtotal = watchItems.reduce((acc, item) => acc + (parseFloat(item.quantity || 1) * parseFloat(item.rate || 0)), 0);
   const tax = subtotal * (parseFloat(watchTaxRate || 0) / 100);
   const total = subtotal + tax;
@@ -109,7 +109,7 @@ export default function NewQuotePage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 relative">
-      {/* Toast */}
+      {}
       {toastMessage && (
         <div className="fixed top-8 right-8 z-[100] bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl flex items-center gap-3 animate-fade-in-down">
           <CheckCircle2 className="h-5 w-5 text-green-400" />
@@ -146,7 +146,7 @@ export default function NewQuotePage() {
             </div>
           </div>
 
-          {/* Line Items */}
+          {}
           <div className="mt-8">
             <h4 className="text-base font-medium text-gray-900 mb-4 border-b pb-2">Line Items</h4>
             <div className="space-y-3">

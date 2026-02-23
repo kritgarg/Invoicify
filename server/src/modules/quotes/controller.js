@@ -61,4 +61,3 @@ export const deleteQuote = async (req, res) => {
   }
 };
 
-

@@ -93,7 +93,7 @@ export default function InvoiceDetailPage() {
     );
   }
 
-  // Visual Overdue Override
+  
   const isVisualOverdue = invoice.status !== 'PAID' && new Date(invoice.dueDate) < new Date();
   const displayStatus = isVisualOverdue ? 'OVERDUE' : invoice.status;
 
