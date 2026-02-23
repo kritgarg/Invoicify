@@ -81,7 +81,7 @@ export default function DashboardLayout({ children }) {
   const hasAccess = requiredRoles.includes(currentRole);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen h-[100dvh] w-full overflow-hidden">
       <Topbar user={user} />
       <div className="flex flex-col flex-1 w-full overflow-hidden">
         <main className="flex-1 relative overflow-y-auto focus:outline-none">

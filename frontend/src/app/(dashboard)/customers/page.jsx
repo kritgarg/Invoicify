@@ -171,19 +171,19 @@ export default function CustomersPage() {
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Name <span className="text-red-500">*</span></label>
-                      <input {...register('name', { required: true })} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent" />
+                      <input {...register('name', { required: true })} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Email</label>
-                      <input {...register('email')} type="email" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent" />
+                      <input {...register('email')} type="email" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Phone</label>
-                      <input {...register('phone')} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent" />
+                      <input {...register('phone')} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Billing Address</label>
-                      <textarea {...register('address')} rows="2" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent" />
+                      <textarea {...register('address')} rows="2" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                     </div>
 
                     <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">

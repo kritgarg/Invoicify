@@ -25,6 +25,7 @@ model Organization {
   invoices  Invoice[]
   invoiceItems InvoiceItem[]
   payments  Payment[]
+  quotes    Quote[]
 }
 
 model User {
@@ -40,6 +41,7 @@ model User {
   updatedAt      DateTime     @updatedAt
 
   assignedCustomers Customer[]
+  quotes            Quote[]
 }
 
 model Customer {
@@ -56,6 +58,7 @@ model Customer {
   assignedTo     User?        @relation(fields: [assignedToId], references: [id])
   
   invoices         Invoice[]
+  quotes           Quote[]
 
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
@@ -134,4 +137,45 @@ model Payment {
 
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  CONVERTED
+  REJECTED
+}
+
+model Quote {
+  id             String   @id @default(cuid())
+  quoteNumber    String   @unique
+  customerId     String
+  customer       Customer @relation(fields: [customerId], references: [id])
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  status         QuoteStatus @default(DRAFT)
+  issueDate      DateTime    @default(now())
+  expiryDate     DateTime?
+
+  subtotal       Float
+  tax            Float
+  total          Float
+
+  createdById    String
+  createdBy      User @relation(fields: [createdById], references: [id])
+
+  items          QuoteItem[]
+  createdAt      DateTime @default(now())
+}
+
+model QuoteItem {
+  id          String  @id @default(cuid())
+  quoteId     String
+  quote       Quote   @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  description String
+  quantity    Int
+  rate        Float
+  tax         Float
+  total       Float
 }

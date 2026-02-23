@@ -11,7 +11,8 @@ The application is built with a multi-tenant architecture, ensuring data isolati
 - **Customer Management:** Maintain a directory of clients with their contact and billing information.
 - **Item/Product Management:** Keep a catalog of frequently billed products or services to speed up invoice creation.
 - **Invoice Generation:** Create detailed invoices, calculate taxes and totals automatically, and track statuses (Draft, Sent, Paid, Overdue).
-- **PDF Export:** Instantly generate and download professional PDF versions of your invoices.
+- **Quotations:** Create estimates/quotes for customers, export as PDFs, and allow tracking statuses.
+- **PDF Export:** Instantly generate and download professional PDF versions of your invoices and quotes.
 
 ### Security & Architecture
 - **JWT Authentication:** Secure login and registration using HTTP-only, secure cookies to prevent XSS attacks.

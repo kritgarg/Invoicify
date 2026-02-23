@@ -20,6 +20,7 @@ const INVOICE_ROUTES = [
   { name: 'Customers', href: '/customers', icon: Users, roles: ['admin', 'staff'] },
   { name: 'Items', href: '/items', icon: Package, roles: ['admin', 'staff'] },
   { name: 'Invoices', href: '/invoices', icon: FileText, roles: ['admin', 'staff'] },
+  { name: 'Quotations', href: '/quotes', icon: FileText, roles: ['admin', 'staff'] },
   { name: 'Reports', href: '/reports', icon: PieChart, roles: ['admin'] },
   { name: 'User Management', href: '/users', icon: UserCog, roles: ['admin'] },
   { name: 'Settings', href: '/settings', icon: Settings, roles: ['admin'] },

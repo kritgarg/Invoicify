@@ -162,15 +162,15 @@ export default function UsersManagementPage() {
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Name</label>
-                      <input {...register('name', { required: true })} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent !text-gray-900 dark:!text-white" />
+                      <input {...register('name', { required: true })} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Email Address</label>
-                      <input {...register('email', { required: true })} type="email" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent !text-gray-900 dark:!text-white" />
+                      <input {...register('email', { required: true })} type="email" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Temporary Password</label>
-                      <input {...register('password', { required: true, minLength: 8 })} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent !text-gray-900 dark:!text-white" />
+                      <input {...register('password', { required: true, minLength: 8 })} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                       <p className="text-xs text-gray-500 mt-1">Must be at least 8 characters.</p>
                     </div>
 

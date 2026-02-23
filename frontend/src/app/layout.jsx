@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${outfit.className} antialiased bg-gradient-to-br from-[#fcf9e8] via-[#fdfdf5] to-[#fcebba] text-[#1c1c1c] min-h-screen`}>
+      <body className={`${outfit.className} antialiased bg-gradient-to-br from-[#fcf9e8] via-[#fdfdf5] to-[#fcebba] text-[#1c1c1c] min-h-screen bg-fixed`}>
         {children}
       </body>
     </html>

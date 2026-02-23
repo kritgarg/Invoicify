@@ -10,6 +10,7 @@ import customerRoutes from "./modules/customers/routes.js";
 import itemRoutes from "./modules/items/routes.js";
 import invoiceRoutes from "./modules/invoices/routes.js";
 import dashboardRoutes from "./modules/dashboard/routes.js";
+import quoteRoutes from "./modules/quotes/routes.js";
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use("/api/customers", customerRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/invoices", invoiceRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/quotes", quoteRoutes);
 
 // General health check
 app.get("/api/health", (req, res) => {

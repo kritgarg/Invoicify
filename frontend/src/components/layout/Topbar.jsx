@@ -1,9 +1,7 @@
 'use client';
 
 import { 
-  Bell,
   LogOut,
-  User,
   Settings
 } from 'lucide-react';
 import Link from 'next/link';
@@ -16,6 +14,7 @@ const INVOICE_ROUTES = [
   { name: 'Customers', href: '/customers', roles: ['admin', 'staff'] },
   { name: 'Items', href: '/items', roles: ['admin', 'staff'] },
   { name: 'Invoices', href: '/invoices', roles: ['admin', 'staff'] },
+  { name: 'Quotations', href: '/quotes', roles: ['admin', 'staff'] },
   { name: 'Reports', href: '/reports', roles: ['admin'] },
   { name: 'Users', href: '/users', roles: ['admin'] },
   { name: 'Settings', href: '/settings', roles: ['admin'] },
@@ -69,14 +68,6 @@ export default function Topbar({ user }) {
 
         {/* Action Icons */}
         <div className="flex items-center gap-3">
-          <button className="p-3 bg-white/70 backdrop-blur-3xl rounded-full shadow-sm hover:bg-white/90 transition border border-gray-900/10">
-            <Bell className="w-5 h-5 text-gray-800" />
-          </button>
-          
-          <button className="p-3 bg-white/70 backdrop-blur-3xl rounded-full shadow-sm hover:bg-white/90 transition border border-gray-900/10">
-            <User className="w-5 h-5 text-gray-800" />
-          </button>
-
           <button onClick={handleLogout} className="p-3 bg-white/70 backdrop-blur-3xl rounded-full shadow-sm hover:bg-red-100 hover:text-red-600 transition border border-gray-900/10">
             <LogOut className="w-5 h-5 text-gray-800 hover:text-red-600" />
           </button>

@@ -361,7 +361,7 @@ export default function InvoicesPage() {
                         <div className="flex justify-between items-center text-gray-700">
                           <div className="flex items-center">
                             Tax 
-                            <input {...register('taxRate')} type="number" step="0.1" className="w-16 ml-2 px-1 py-0.5 border border-gray-300 rounded bg-transparent text-right" />%
+                            <input {...register('taxRate')} type="number" step="0.1" className="w-16 ml-2 px-1 py-0.5 border border-gray-300 rounded bg-transparent text-gray-900 text-right" />%
                           </div>
                           <span className="font-medium">{formatCurrency(tax, currency)}</span>
                         </div>

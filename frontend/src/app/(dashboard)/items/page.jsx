@@ -175,15 +175,15 @@ export default function ItemsPage() {
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Item Name <span className="text-red-500">*</span></label>
-                      <input {...register('name', { required: true })} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent !text-gray-900 dark:!text-white" />
+                      <input {...register('name', { required: true })} type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Base Price ({currency}) <span className="text-red-500">*</span></label>
-                      <input {...register('price', { required: true, min: 0, valueAsNumber: false })} type="number" step="0.01" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent !text-gray-900 dark:!text-white" />
+                      <input {...register('price', { required: true, min: 0, valueAsNumber: false })} type="number" step="0.01" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Description</label>
-                      <textarea {...register('description')} rows="3" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent !text-gray-900 dark:!text-white" />
+                      <textarea {...register('description')} rows="3" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-gray-900" />
                     </div>
 
                     <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
